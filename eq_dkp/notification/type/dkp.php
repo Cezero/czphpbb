@@ -8,7 +8,7 @@
  *
  */
 
-namespace bum\dkp\notification\type;
+namespace eq_dkp\notification\type;
 
 /**
  * DKPAddon Notification class.
@@ -37,7 +37,7 @@ class dkp extends \phpbb\notification\type\base
 	 */
 	public function get_type()
 	{
-		return 'bum.dkp.notification.type.dkp';
+		return 'eq_dkp.notification.type.dkp';
 	}
 
 	/**
@@ -118,7 +118,7 @@ class dkp extends \phpbb\notification\type\base
 	 */
 	public function get_title()
 	{
-		return $this->user->lang('BUM_DKP_NOTIFICATION');
+		return $this->user->lang('EQ_DKP_NOTIFICATION');
 	}
 
 	/**
@@ -128,7 +128,7 @@ class dkp extends \phpbb\notification\type\base
 	 */
 	public function get_url()
 	{
-		return $this->helper->route('bum_dkp_controller', $this->get_data('bum_dkp'));
+		return $this->helper->route('eq_dkp_controller', $this->get_data('eq_dkp'));
 	}
 
 	/**
@@ -162,7 +162,7 @@ class dkp extends \phpbb\notification\type\base
 	 */
 	public function create_insert_array($data, $pre_create_data = array())
 	{
-		$this->set_data('bum_dkp', $data['bum_dkp']);
+		$this->set_data('eq_dkp', $data['eq_dkp']);
 
 		return parent::create_insert_array($data, $pre_create_data);
 	}
