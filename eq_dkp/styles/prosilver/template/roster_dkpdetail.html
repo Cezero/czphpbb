@@ -1,0 +1,101 @@
+<!-- INCLUDE overall_header.html -->
+<!-- INCLUDEJS roster_dkpdetail.js -->
+<!-- INCLUDECSS custom.css -->
+<script type="text/javascript">
+var bumDKPdelitemurl = '{U_DEL_ITEM}';
+var bumDKPdeladjurl = '{U_DEL_ADJ}';
+</script>
+
+<div style="width: 100%; overflow: hidden;">
+<div style="width: 150px; float: left;">
+<!-- INCLUDE roster_menu.html -->
+</div>
+<div style="margin-left: 151px;">
+<h2 class="solo">{PAGE_TITLE}</h2>
+
+	<div class="action-bar bar-top">
+		<div class="member-search panel">
+			<!-- BEGIN filter_type -->
+				<!-- IF filter_type.S_SELECTED --><strong><!-- ENDIF -->
+					<a href="{filter_type.U_SORT}">{filter_type.DESC}</a>&nbsp;
+				<!-- IF filter_type.S_SELECTED --></strong><!-- ENDIF -->
+			<!-- END filter_type -->
+		</div>
+
+		<div class="pagination">
+			{TOTAL_EVENTS}
+			<!-- IF .pagination -->
+				<!-- INCLUDE pagination.html -->
+			<!-- ELSE -->
+				 &bull; {PAGE_NUMBER}
+			<!-- ENDIF -->
+		</div>
+	</div>
+
+	<div class="forumbg forumbg-table">
+		<div class="inner">
+		<table class="table1" id="dkpdetail">
+		<thead>
+		<tr>
+			<th class="name"><a title="{L_SORT_EVENTDATE}" href="{U_SORT_EVENTDATE}">{L_EVENTDATE}</a></th>
+			<th class="name"><a title="{L_SORT_EVENTTYPE}" href="{U_SORT_EVENTTYPE}">{L_EVENTTYPE}</a></th>
+			<th class="name">{L_EVENTDESC}</th>
+			<th class="posts"><a title="{L_SORT_EVENTENTEREDBY}" href="{U_SORT_EVENTENTEREDBY}">{L_ENTEREDBY}</a></th>
+			<th class="posts"><a title="{L_SORT_EVENTDKP}" href="{U_SORT_EVENTDKP}">{L_EVENTDKP}</a></th>
+			<!-- IF IS_OFFICER --><th>Editing</th><!-- ENDIF -->
+		</tr>
+		</thead>
+		<tbody>
+		<!-- BEGIN eventrow -->
+	<tr class="<!-- IF raidrow.S_ROW_COUNT is even -->bg1<!-- ELSE -->bg2<!-- ENDIF -->" {eventrow.EVENTDATA}>
+		<td>{eventrow.DATE}</td>
+		<td>{eventrow.TYPE}</td>
+		<td>
+		<!-- IF eventrow.TYPE == 'Raid' -->
+			<a href="{eventrow.U_VIEW_EVENT}">{eventrow.DESC} ({eventrow.RSTART} - {eventrow.REND})&nbsp;<!-- IF eventrow.CTICKS --><!-- ELSE -->ABSENT<!-- ENDIF --></a>
+		<!-- ELSEIF eventrow.TYPE == 'Loot Award' -->
+			<a data-lucy="item={eventrow.LUCY_ID}" href="{eventrow.U_ITEMINFO}">{eventrow.ITEMNAME}</a>&nbsp;&nbsp;(Awarded to {eventrow.CHAR_NAME})
+		<!-- ELSEIF eventrow.TYPE == 'Adjustment' -->
+			{eventrow.DESC}
+		<!-- ELSE -->
+			DKP Rollover from legacy system
+		<!-- ENDIF -->
+		</td>
+		<td>{eventrow.ENTEREDBY}</td>
+		<td class="posts">{eventrow.DKP}</td>
+		<!-- IF IS_OFFICER -->
+		<td>
+			<!-- IF eventrow.U_EDIT_EVENT -->
+			<a class="button button-icon-only" title="{eventrow.S_EDIT_EVENT}" href="{eventrow.U_EDIT_EVENT}"><i class="icon fa-pencil fa-fw"></i></a>&nbsp;
+			<!-- ENDIF -->
+			<!-- IF eventrow.DELETABLE -->
+			<span class="button button-icon-only" title="{eventrow.S_DEL_EVENT}" id="{eventrow.EVENTID}"><i class="icon fa-times fa-fw"></i></span>
+			<!-- ENDIF -->
+		</td>
+		<!-- ENDIF -->
+	</tr>
+		<!-- BEGINELSE -->
+	<tr class="bg1">
+		<td colspan="5">{L_NO_EVENTS}</td>
+	</tr>
+		<!-- END eventrow -->
+	</tbody>
+	</table>
+
+	</div>
+</div>
+
+<div class="action-bar bar-bottom">
+	<div class="pagination">
+		{TOTAL_RAIDS}
+		<!-- IF .pagination -->
+			<!-- INCLUDE pagination.html -->
+		<!-- ELSE -->
+			 &bull; {PAGE_NUMBER}
+		<!-- ENDIF -->
+	</div>
+</div>
+</div>
+</div>
+<!-- INCLUDE jumpbox.html -->
+<!-- INCLUDE overall_footer.html -->

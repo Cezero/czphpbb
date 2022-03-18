@@ -1,0 +1,88 @@
+<!-- INCLUDE overall_header.html -->
+<!-- INCLUDEJS bum_dkp_util.js -->
+<!-- INCLUDECSS ../theme/custom.css -->
+<div style="width: 100%; overflow: hidden;">
+<div style="width: 150px; float: left;">
+<!-- INCLUDE roster_menu.html -->
+</div>
+<div style="margin-left: 151px;">
+<h2 class="solo">{PAGE_TITLE}</h2>
+<label><strong>Date{L_COLON}</strong></label>&nbsp;{RAID_DATE}&nbsp;({RAID_START} - {RAID_END})
+<br/>
+<label for="bum_dkp_double"><strong>Double DKP{L_COLON}</strong></label>
+<input type="checkbox" id="bum_dkp_double" name="bum_dkp_double" value="1"{DOUBLE_CHECKED}/>&nbsp;&nbsp;
+<label for="bum_dkp_seconds_earn"><strong>Second Mains Earn DKP{L_COLON}</strong></label>
+<input type="checkbox" id="bum_dkp_seconds_earn" name="bum_dkp_seconds_earn" value="1"{SECONDS_CHECKED}/>
+<br/>
+<!-- BEGIN loot -->
+<div class="forumbg forumbg-table" style="width: 800px; overflow: auto;"/>
+	<table class="table2">
+		<thead>
+			<tr><th class="text-button togglelist" id="item">{L_ITEMS}</th></tr>
+		</thead>
+	</table>
+	<div id="itemlist" class="attendance-table"/>
+	<!-- BEGIN col -->
+		<div style="width: 395px; float: left; margin: 2px;">
+			<table class="table2">
+				<thead>
+					<tr>
+						<th class="name">{L_ITEM}</th>
+						<th class="center">{L_AWARDEDTO}</th>
+						<th class="center">{L_COST}</th>
+					</tr>
+				</thead>
+				<tbody>
+					<!-- BEGIN row -->
+					<tr class="<!-- IF characters.col.row.S_ROW_COUNT is even -->bg1<!-- ELSE -->bg2<!-- ENDIF -->">
+						<td>
+							<a href="{loot.col.row.U_VIEW_ITEM}" data-lucy="item={loot.col.row.LUCY_ID}">{loot.col.row.NAME}</a>
+						</td>
+						<td class="center">{loot.col.row.AWARDED}</td>
+						<td class="center">{loot.col.row.COST}</td>
+					</tr>
+					<!-- END row -->
+				</tbody>
+			</table>
+		</div>
+	<!-- END col -->
+	</div>
+</div>
+<!-- END loot -->
+<!-- BEGIN characters -->
+<div class="forumbg forumbg-table" style="width: 800px; overflow: auto;"/>
+	<table class="table2">
+		<thead>
+			<tr><th class="text-button togglelist" id="{characters.TYPE}">{characters.L_TYPE}</th></tr>
+		</thead>
+	</table>
+	<div id="{characters.TYPE}list" class="attendance-table"/>
+		<!-- BEGIN col -->
+		<div style="width: 395px; float: left; margin: 2px;">
+			<table class="table2">
+				<thead>
+					<tr>
+						<th class="name">{L_CHAR_NAME}</th>
+						<th class="center">{L_ATTENDANCE}</th>
+						<th class="center">{L_TICKS}</th>
+						<th class="center">{L_DKP}</th>
+					</tr>
+				</thead>
+				<tbody>
+					<!-- BEGIN row -->
+					<tr class="<!-- IF characters.col.row.S_ROW_COUNT is even -->bg1<!-- ELSE -->bg2<!-- ENDIF -->">
+						<td>{characters.col.row.NAME}</td>
+						<td class="center">{characters.col.row.ATTEND}</td>
+						<td class="center">{characters.col.row.TICKS}</td>
+						<td class="center">{characters.col.row.DKP}</td>
+					</tr>
+					<!-- END row -->
+				</tbody>
+			</table>
+		</div>
+		<!-- END col -->
+	</div>
+</div>
+<!-- END characters -->
+<!-- INCLUDE jumpbox.html -->
+<!-- INCLUDE overall_footer.html -->
