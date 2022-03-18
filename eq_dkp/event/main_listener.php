@@ -84,7 +84,7 @@ class main_listener implements EventSubscriberInterface
 	}
 
 	/**
-	 * Show users viewing Bum DKP on the Who Is Online page
+	 * Show users viewing EQ DKP on the Who Is Online page
 	 *
 	 * @param \phpbb\event\data	$event	Event object
 	 */
