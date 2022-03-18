@@ -1,15 +1,15 @@
-$.bumDKP = new Object();
+$.eqDKP = new Object();
 
 function getMain(id) {
-	return $.bumDKP.charlist[id].find(e => e['role'] == 2);
+	return $.eqDKP.charlist[id].find(e => e['role'] == 2);
 }
 
 function getSecond(id) {
-	return $.bumDKP.charlist[id].find(e => e['role'] == 1);
+	return $.eqDKP.charlist[id].find(e => e['role'] == 1);
 }
 
 function getChar(id, charid) {
-	return $.bumDKP.charlist[id].find(e => e['id'] == charid);
+	return $.eqDKP.charlist[id].find(e => e['id'] == charid);
 }
 
 function makeCharButton(id, text) {
@@ -33,7 +33,7 @@ function makeTimeButton(id, role, offset, text) {
 
 function makeItemButton(id) {
 	var ib = $('<img>', {
-		src: '/ext/bum/dkp/styles/prosilver/template/images/dagger.png',
+		src: '/ext/eq_dkp/styles/prosilver/template/images/dagger.png',
 		id: 'ib_'+id,
 		title: 'Award Item',
 		"class": 'text-button',
@@ -49,7 +49,7 @@ function parseName() {
 	var role = row.attr('data-role');
 	var displayElement = $('#cn_'+role+'_'+userID);
 	var asChar = $('#ua_'+userID).val();
-	$.bumDKP.editchar = 0; // we're no longer picking a name
+	$.eqDKP.editchar = 0; // we're no longer picking a name
 
 	displayElement.empty(); // clear it out
 
@@ -76,10 +76,10 @@ function parseAttend() {
 	var userID = row.attr('data-userid');
 	var role = row.attr('data-role');
 	var displayElement = $('#ad_'+role+'_'+userID);
-	var raidEnd = Number($('#bum_dkp_raidend').val());
+	var raidEnd = Number($('#eq_dkp_raidend').val());
 	var time_str = $( '#ut_'+role+'_'+userID ).val();
 	displayElement.empty(); // clear it out
-	$.bumDKP.editing = 0; // we're no longer editing anyone
+	$.eqDKP.editing = 0; // we're no longer editing anyone
 
 	var buttonDiv = $('<div/>', {
 			style: "width: 185px; float: left;"
@@ -111,7 +111,7 @@ function parseAttend() {
 		buttonDiv.append(makeTimeButton(userID, role, 0, 'ABSENT'));
 	}
 
-	if(addItemButton && bumDKPraid_id > 0) {
+	if(addItemButton && eqDKPraid_id > 0) {
 		var itemDiv = $('<div>', {
 				style: "float: left;"
 				});
@@ -131,15 +131,15 @@ function parseAttend() {
 
 function displayItemList() {
 	// only do something if we actually have items
-	if ($.bumDKP.itemlist.length > 0) {
+	if ($.eqDKP.itemlist.length > 0) {
 		var itemDisplayElement = $( '#itemlist' );
 		itemDisplayElement.empty();
 		// two column display, half the items on each side
-		var midpoint = Math.floor($.bumDKP.itemlist.length/2);
+		var midpoint = Math.floor($.eqDKP.itemlist.length/2);
 		var div = $('<div/>', { style: 'width: 320px; float: left;' });
 		var table = createTable(['Item','Awarded To', 'Cost']);
 		div.append(table);
-		for (var i = 0; i < $.bumDKP.itemlist.length; i++) {
+		for (var i = 0; i < $.eqDKP.itemlist.length; i++) {
 			if (i == midpoint) {
 				// setup a new div
 				itemDisplayElement.append(div);
@@ -151,26 +151,26 @@ function displayItemList() {
 			var rowClass = (rowCnt%2 == 0 ? 'bg1' : 'bg2');
 			var itemRow = $('<tr/>', {
 					'class': rowClass,
-					'data-userid': $.bumDKP.itemlist[i].user_id,
-					'data-charid': $.bumDKP.itemlist[i].char_id,
-					'data-lucyid': $.bumDKP.itemlist[i].lucy_id,
+					'data-userid': $.eqDKP.itemlist[i].user_id,
+					'data-charid': $.eqDKP.itemlist[i].char_id,
+					'data-lucyid': $.eqDKP.itemlist[i].lucy_id,
 					});
 			var zamLink = $('<a/>', {
-				href: bumDKPviewitemurl + '?lucyid=' + $.bumDKP.itemlist[i].lucy_id,
-				'data-lucy': 'item=' + $.bumDKP.itemlist[i].lucy_id,
-				text: $.bumDKP.itemlist[i].name
+				href: eqDKPviewitemurl + '?lucyid=' + $.eqDKP.itemlist[i].lucy_id,
+				'data-lucy': 'item=' + $.eqDKP.itemlist[i].lucy_id,
+				text: $.eqDKP.itemlist[i].name
 				});
 			$('<td/>').appendTo(itemRow).append(zamLink);
-			var award_str = $.bumDKP.itemlist[i].awarded;
-			if ($.bumDKP.itemlist[i].role != 2) {
+			var award_str = $.eqDKP.itemlist[i].awarded;
+			if ($.eqDKP.itemlist[i].role != 2) {
 				// wasn't awarded to main character
-				var role = $.bumDKP.itemlist[i].role == 0 ? 'Alt' : '2nd';
-				award_str += '<br/><span class="charas-text">(' + $.bumDKP.itemlist[i].main + ' ' + role + ')</span>';
+				var role = $.eqDKP.itemlist[i].role == 0 ? 'Alt' : '2nd';
+				award_str += '<br/><span class="charas-text">(' + $.eqDKP.itemlist[i].main + ' ' + role + ')</span>';
 			}
 			itemRow.append($('<td/>', { html: award_str }));
 			var cost_elem = $('<span/>', {
-					text: $.bumDKP.itemlist[i].cost,
-					id: 'id_' + $.bumDKP.itemlist[i].lucy_id,
+					text: $.eqDKP.itemlist[i].cost,
+					id: 'id_' + $.eqDKP.itemlist[i].lucy_id,
 					'class': 'text-button',
 					title: 'Delete Item'
 					});
@@ -183,15 +183,15 @@ function displayItemList() {
 }
 
 function getItemData() {
-	if (bumDKPraid_id > 0) {
+	if (eqDKPraid_id > 0) {
 		$.ajax({
 				type: 'post',
-				url: bumDKPitemlist,
+				url: eqDKPitemlist,
 				data: {
-					"raid_id": bumDKPraid_id,
+					"raid_id": eqDKPraid_id,
 					},
 				success: function (data) {
-					$.bumDKP.itemlist = data;
+					$.eqDKP.itemlist = data;
 					displayItemList();
 					},
 				error: function (data) {
@@ -205,9 +205,9 @@ function getItemData() {
 function getCharacterData() {
 	$.ajax({
 			type: 'post',
-			url: bumDKPcharlist,
+			url: eqDKPcharlist,
 			success: function (data) {
-				$.bumDKP.charlist = data;
+				$.eqDKP.charlist = data;
 				parseAllNames();
 				},
 			error: function (data) {
@@ -228,7 +228,7 @@ function awardItemSubmit( event ) {
 		return;
 	}
 	var formData = $(this).serialize();
-	formData += '&raid_id=' + bumDKPraid_id;
+	formData += '&raid_id=' + eqDKPraid_id;
 	console.log('serialized: '+formData);
 	$.ajax({
 			type: $(this).attr('method'),
@@ -271,11 +271,11 @@ function awardItemDialog( event ) {
 			width: 'auto',
 			close: function (ev, ui) {
 					$(this).remove();
-					$.bumDKP.awarditem = 0;
+					$.eqDKP.awarditem = 0;
 				}
 		}).dialog('open');
 	var ai_form = $('<form>', {
-			action: bumDKPawarditemurl,
+			action: eqDKPawarditemurl,
 			id: 'award_item_form',
 			method: 'POST',
 			submit: awardItemSubmit
@@ -311,7 +311,7 @@ function awardItemDialog( event ) {
 			width: '160'
 			});
 	itemAuto.autocomplete({
-			source: bumDKPitemqueryurl,
+			source: eqDKPitemqueryurl,
 			select: function ( event, ui ) {
 				event.preventDefault();
 				$( this ).val( ui.item.label );
@@ -430,7 +430,7 @@ function selectedToTop( event, ui ) {
 }
 
 function getCharOptionList(id, selected = -1) {
-	var charList = $.bumDKP.charlist[id];
+	var charList = $.eqDKP.charlist[id];
 	var output_str = '';
 	for (var i = 0; i < charList.length; i++) {
 		var sel = '';
@@ -467,7 +467,7 @@ function editTime() {
 	var role = row.attr('data-role');
 	var attendDispElmnt = $('#ad_'+role+'_'+id);
 	var offset = $( this ).attr('data-offset');
-	var raidStart = Number($('#bum_dkp_raidstart').val());
+	var raidStart = Number($('#eq_dkp_raidstart').val());
 	var time_str = $('#ut_'+role+'_'+id).val();
 
 	$( this ).empty();
@@ -504,11 +504,11 @@ function editTime() {
 }
 
 function parseAllNames() {
-	$( ".bum_dkp_name_display" ).each(parseName);
+	$( ".eq_dkp_name_display" ).each(parseName);
 }
 
 function parseAllAttend() {
-	$( ".bum_dkp_attend_display" ).each(parseAttend);
+	$( ".eq_dkp_attend_display" ).each(parseAttend);
 }
 
 function itemDeleteClicked( event ) {
@@ -517,9 +517,9 @@ function itemDeleteClicked( event ) {
 	var lucyID = $( this ).closest('tr').attr('data-lucyid');
 	$.ajax({
 			type: 'post',
-			url: bumDKPdelitemurl,
+			url: eqDKPdelitemurl,
 			data: {
-				"raid_id": bumDKPraid_id,
+				"raid_id": eqDKPraid_id,
 				"user_id": userID,
 				"char_id": charID,
 				"lucy_id": lucyID
@@ -537,12 +537,12 @@ function itemDeleteClicked( event ) {
 
 function itemButtonClicked( event ) {
 	var userID = $( this ).closest('tr').attr('data-userid');
-	if ($.bumDKP.awarditem > 0) {
-		if (userID == $.bumDKP.awarditem) {
-			console.log("already awarding an item: " + $.bumDKP.awarditem + " ignoring this event (for now)");
+	if ($.eqDKP.awarditem > 0) {
+		if (userID == $.eqDKP.awarditem) {
+			console.log("already awarding an item: " + $.eqDKP.awarditem + " ignoring this event (for now)");
 		}
 	} else {
-		$.bumDKP.awarditem = userID;
+		$.eqDKP.awarditem = userID;
 		awardItemDialog.call($(this));
 	}
 	event.stopPropagation();
@@ -550,12 +550,12 @@ function itemButtonClicked( event ) {
 
 function charButtonClicked( event ) {
 	var userID = $( this ).closest('tr').attr('data-userid');
-	if ($.bumDKP.editchar > 0) {
-		if (userID == $.bumDKP.editchar) {
-			console.log("already picking character: " + $.bumDKP.editchar + " ignoring this event (for now)");
+	if ($.eqDKP.editchar > 0) {
+		if (userID == $.eqDKP.editchar) {
+			console.log("already picking character: " + $.eqDKP.editchar + " ignoring this event (for now)");
 		}
 	} else {
-		$.bumDKP.editchar = userID;
+		$.eqDKP.editchar = userID;
 		editChar.call($(this));
 	}
 	event.stopPropagation();
@@ -563,40 +563,40 @@ function charButtonClicked( event ) {
 
 function attendanceEntryClicked( event ) {
 	var userID = $( this ).closest('tr').attr('data-userid');
-	if ($.bumDKP.editing > 0) { // we're already editing someone
-		if (userID == $.bumDKP.editing) {
-			console.log("already editing: " + $.bumDKP.editing + " ignoring this event (for now)");
+	if ($.eqDKP.editing > 0) { // we're already editing someone
+		if (userID == $.eqDKP.editing) {
+			console.log("already editing: " + $.eqDKP.editing + " ignoring this event (for now)");
 //		} else {
-//			parseAttend($.bumDKP.editing);
+//			parseAttend($.eqDKP.editing);
 		}
 	} else {
-		$.bumDKP.editing = userID;
+		$.eqDKP.editing = userID;
 		editTime.call($(this));
 	}
 	event.stopPropagation();
 }
 
 function setRaidEndOpts () {
-	var raidStart = Number($('#bum_dkp_raidstart').val());
-	var raidEnd = Number($('#bum_dkp_raidend').val());
+	var raidStart = Number($('#eq_dkp_raidstart').val());
+	var raidEnd = Number($('#eq_dkp_raidend').val());
 	if (raidEnd < raidStart || raidEnd < 0) {
-		$('#bum_dkp_raidend').empty().append(getTimeOptionList(raidStart));
-		$('#bum_dkp_raidend').selectmenu('refresh');
+		$('#eq_dkp_raidend').empty().append(getTimeOptionList(raidStart));
+		$('#eq_dkp_raidend').selectmenu('refresh');
 	}
 }
 
 function dateChangeFn () {
-	var date_str = $('#bum_dkp_raiddate').val();
+	var date_str = $('#eq_dkp_raiddate').val();
 	if (date_str) {
-		var defTime = bumDKPweekdaystart;
+		var defTime = eqDKPweekdaystart;
 		var raidDate = new Date(date_str);
 		if (raidDate.getDay() == 0 || raidDate.getDay() == 6) {
 			// weekend
-			defTime = bumDKPweekendstart;
+			defTime = eqDKPweekendstart;
 		}
-		if ($('#bum_dkp_raidstart').val() < 0) {
-			$('#bum_dkp_raidstart').empty().append(getTimeOptionList(-1,defTime));
-			$('#bum_dkp_raidstart').selectmenu('refresh');
+		if ($('#eq_dkp_raidstart').val() < 0) {
+			$('#eq_dkp_raidstart').empty().append(getTimeOptionList(-1,defTime));
+			$('#eq_dkp_raidstart').selectmenu('refresh');
 		}
 		setRaidEndOpts();
 	}
@@ -607,15 +607,15 @@ function readyFn( jQuery ) {
 	getItemData();
 
 	// setup UI elements
-	$('#bum_dkp_raiddate').datepicker({
+	$('#eq_dkp_raiddate').datepicker({
 			maxDate: 0
 			});
-	$('#bum_dkp_raiddate').on('change', dateChangeFn );
-	$('#bum_dkp_raidstart').selectmenu({
+	$('#eq_dkp_raiddate').on('change', dateChangeFn );
+	$('#eq_dkp_raidstart').selectmenu({
 			open: selectedToTop
 			});
-	$('#bum_dkp_raidstart').on('change', setRaidEndOpts );
-	$('#bum_dkp_raidend').selectmenu({
+	$('#eq_dkp_raidstart').on('change', setRaidEndOpts );
+	$('#eq_dkp_raidend').selectmenu({
 			open: selectedToTop
 			});
 

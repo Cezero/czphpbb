@@ -2,7 +2,7 @@ function delAdjClicked ( event ) {
 	var adjID = $( this ).closest('tr').attr('data-adjid');
 	$.ajax({
 			type: 'post',
-			url: bumDKPdeladjurl,
+			url: eqDKPdeladjurl,
 			data: {
 				"adjid": adjID
 				},
@@ -24,7 +24,7 @@ function delItemClicked ( event ) {
 	var raidID = $( this ).closest('tr').attr('data-raidid');
 	$.ajax({
 			type: 'post',
-			url: bumDKPdelitemurl,
+			url: eqDKPdelitemurl,
 			data: {
 				"raid_id": raidID,
 				"user_id": userID,

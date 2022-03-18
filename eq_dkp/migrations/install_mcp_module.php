@@ -8,7 +8,7 @@
  *
  */
 
-namespace bum\dkp\migrations;
+namespace eq_dkp\migrations;
 
 class install_mcp_module extends \phpbb\db\migration\migration
 {
@@ -42,7 +42,7 @@ class install_mcp_module extends \phpbb\db\migration\migration
 				'mcp',
 				'MCP_DKP_TITLE',
 				array(
-					'module_basename'	=> '\bum\dkp\mcp\main_module',
+					'module_basename'	=> '\eq_dkp\mcp\main_module',
 					'modes'				=> array('front'),
 				),
 			)),

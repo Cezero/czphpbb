@@ -1,8 +1,8 @@
 <?php
 
-namespace bum\dkp\util;
+namespace eq_dkp\util;
 
-use bum\dkp\util\gen_util;
+use eq_dkp\util\gen_util;
 
 class dkp_util
 {
@@ -24,7 +24,7 @@ class dkp_util
 				'entered_on' => time(),
 				'description' => $action
 				);
-		$sql = 'INSERT INTO phpbb_bum_dkp_log ' . $this->db->sql_build_array('INSERT', $data);
+		$sql = 'INSERT INTO phpbb_eq_dkp_log ' . $this->db->sql_build_array('INSERT', $data);
 		$this->db->sql_query($sql);
 	}
 
@@ -38,7 +38,7 @@ class dkp_util
 				'entered_on' => time(),
 				'second_pool' => $second_pool,
 				);
-		$sql = 'INSERT INTO phpbb_bum_dkp_adjustment ' . $this->db->sql_build_array('INSERT', $data);
+		$sql = 'INSERT INTO phpbb_eq_dkp_adjustment ' . $this->db->sql_build_array('INSERT', $data);
 		$this->db->sql_query($sql);
 	}
 
@@ -54,8 +54,8 @@ class dkp_util
 				a.entered_on,
 				a.second_pool
 			FROM
-				phpbb_bum_dkp_adjustment as a
-					JOIN phpbb_bum_dkp_characters as c
+				phpbb_eq_dkp_adjustment as a
+					JOIN phpbb_eq_dkp_characters as c
 						ON (c.user_id = c.user_id and ((a.second_pool = 0 and c.role = 2) or (a.second_pool = 1 and c.role = 1)))
 					JOIN  phpbb_users as u
 						ON (u.user_id = a.entered_by)
@@ -71,7 +71,7 @@ class dkp_util
 					$adj_details['entered_by'],
 					date('Y-m-d', $adj_details['entered_on'])
 					));
-		$sql = 'DELETE FROM phpbb_bum_dkp_adjustment where adj_id = ' . (int) $adj_id;
+		$sql = 'DELETE FROM phpbb_eq_dkp_adjustment where adj_id = ' . (int) $adj_id;
 		$this->db->sql_query($sql);
 	}
 
@@ -98,14 +98,14 @@ class dkp_util
 				u.username as entered_by,
 				c.char_name,
 				a.char_times, a.earned_dkp as amount, a.ticks
-			FROM phpbb_bum_dkp_raid r
+			FROM phpbb_eq_dkp_raid r
 			JOIN phpbb_users u
 				ON (u.user_id = r.entered_by)
-			LEFT OUTER JOIN phpbb_bum_dkp_raid_attendance a
+			LEFT OUTER JOIN phpbb_eq_dkp_raid_attendance a
 				ON (a.raid_id = r.raid_id AND
 						a.user_id = ' . (int) $user_id . ' AND
 						a.char_role = ' . (int) $char_role . ')
-			LEFT OUTER JOIN phpbb_bum_dkp_characters c
+			LEFT OUTER JOIN phpbb_eq_dkp_characters c
 				ON (c.char_id = a.char_id)
 			WHERE
 				r.end > -1 AND
@@ -125,12 +125,12 @@ class dkp_util
 				0 - l.cost as amount, l.lucy_id,
 				lu.name as itemname,
 				u.username as entered_by
-			FROM phpbb_bum_dkp_raid_loot l
+			FROM phpbb_eq_dkp_raid_loot l
 			JOIN phpbb_users u
 				ON (u.user_id = l.entered_by)
-			JOIN phpbb_bum_dkp_raid r
+			JOIN phpbb_eq_dkp_raid r
 				ON (r.raid_id = l.raid_id)
-			JOIN phpbb_bum_dkp_characters c
+			JOIN phpbb_eq_dkp_characters c
 				ON (c.char_id = l.char_id)
 			JOIN lucy_itemlist lu
 				ON (lu.id = l.lucy_id)
@@ -146,7 +146,7 @@ class dkp_util
 		$sql = 'SELECT
 				a.adj_id, a.value as amount, a.description, a.entered_on as day,
 				u.username as entered_by
-			FROM phpbb_bum_dkp_adjustment a
+			FROM phpbb_eq_dkp_adjustment a
 			JOIN phpbb_users u
 				ON (u.user_id = a.entered_by)
 			WHERE
@@ -162,7 +162,7 @@ class dkp_util
 		if ($role == 0) {
 			// get rollover DKP
 			$sql = 'SELECT dkp as amount
-				FROM phpbb_bum_dkp_rollover
+				FROM phpbb_eq_dkp_rollover
 				WHERE user_id = ' . (int) $user_id;
 			$result = $this->db->sql_query($sql);
 			$rollover = $this->db->sql_fetchfield('amount');
@@ -178,7 +178,7 @@ class dkp_util
 		// get total earned DKP from completed raids
 		$sql = 'SELECT
 			sum(earned_dkp) as earned
-			FROM phpbb_bum_dkp_raid_attendance
+			FROM phpbb_eq_dkp_raid_attendance
 			WHERE user_id = ' . (int) $user_id . '
 			AND char_role = ' . (int) $char_role;
 		$this->db->sql_query($sql);
@@ -187,7 +187,7 @@ class dkp_util
 		// get total spent DKP
 		$sql = 'SELECT
 			sum(cost) as spent
-			FROM phpbb_bum_dkp_raid_loot
+			FROM phpbb_eq_dkp_raid_loot
 			WHERE user_id = ' . (int) $user_id . '
 			AND second_pool = ' . (int) $second_pool;
 		$this->db->sql_query($sql);
@@ -196,7 +196,7 @@ class dkp_util
 		// get total adjustments
 		$sql = 'SELECT
 			sum(value) as adjusted
-			FROM phpbb_bum_dkp_adjustment
+			FROM phpbb_eq_dkp_adjustment
 			WHERE user_id = ' . (int) $user_id . '
 			AND second_pool = ' . (int) $second_pool;
 		$this->db->sql_query($sql);
@@ -207,7 +207,7 @@ class dkp_util
 		if ($role == 1) {
 			// get rollover DKP
 			$sql = 'SELECT dkp
-				FROM phpbb_bum_dkp_rollover
+				FROM phpbb_eq_dkp_rollover
 				WHERE user_id = ' . (int) $user_id;
 			$result = $this->db->sql_query($sql);
 			$rollover = $this->db->sql_fetchfield('dkp');
@@ -218,8 +218,8 @@ class dkp_util
 			// user should earn credit for right now
 			$sql = 'SELECT
 				t1.start, t1.double_dkp, t1.seconds_earn, t2.char_times
-				FROM phpbb_bum_dkp_raid as t1
-				LEFT JOIN phpbb_bum_dkp_raid_attendance as t2
+				FROM phpbb_eq_dkp_raid as t1
+				LEFT JOIN phpbb_eq_dkp_raid_attendance as t2
 					ON (t2.raid_id = t1.raid_id)
 				WHERE t1.end < 0
 				AND t2.user_id = ' . (int) $user_id . '
@@ -229,7 +229,7 @@ class dkp_util
 			$this->db->sql_freeresult($result);
 			if (isset($row['char_times'])) {
 				if ($role != 2 || $row['seconds_earn'] == 1) {
-					$ppt = $role == 2 ? $this->config['bum_dkp_second_dkp_per_tick'] : $this->config['bum_dkp_main_dkp_per_tick'];
+					$ppt = $role == 2 ? $this->config['eq_dkp_second_dkp_per_tick'] : $this->config['eq_dkp_main_dkp_per_tick'];
 					if ($row['double_dkp'] == 1) {
 						$ppt += $ppt;
 					}
@@ -257,7 +257,7 @@ class dkp_util
 		// get all earned dkp from completed raids
 		$sql = 'SELECT
 			user_id, char_role, sum(earned_dkp) as earned
-			FROM phpbb_bum_dkp_raid_attendance
+			FROM phpbb_eq_dkp_raid_attendance
 			group by user_id, char_role';
 		$result = $this->db->sql_query($sql);
 		$rows = $this->db->sql_fetchrowset($result);
@@ -269,7 +269,7 @@ class dkp_util
 		// get all spent DKP
 		$sql = 'SELECT
 			user_id, second_pool, sum(cost) as spent
-			FROM phpbb_bum_dkp_raid_loot
+			FROM phpbb_eq_dkp_raid_loot
 			GROUP BY user_id, second_pool';
 		$result = $this->db->sql_query($sql);
 		$rows = $this->db->sql_fetchrowset($result);
@@ -281,7 +281,7 @@ class dkp_util
 		// get all adjustments
 		$sql = 'SELECT
 			user_id, second_pool, sum(value) as adjustment
-			FROM phpbb_bum_dkp_adjustment
+			FROM phpbb_eq_dkp_adjustment
 			GROUP BY user_id, second_pool';
 		$result = $this->db->sql_query($sql);
 		$rows = $this->db->sql_fetchrowset($result);
@@ -293,7 +293,7 @@ class dkp_util
 		// get rollover DKP
 		$sql = 'SELECT
 			user_id, dkp
-			FROM phpbb_bum_dkp_rollover';
+			FROM phpbb_eq_dkp_rollover';
 		$result = $this->db->sql_query($sql);
 		$rows = $this->db->sql_fetchrowset($result);
 		$this->db->sql_freeresult($result);
@@ -305,8 +305,8 @@ class dkp_util
 			// get current open raid?
 			$sql = 'SELECT
 				t1.start, t1.double_dkp, t1.seconds_earn, t2.user_id, t2.char_role, t2.char_times
-				FROM phpbb_bum_dkp_raid as t1
-				LEFT JOIN phpbb_bum_dkp_raid_attendance as t2
+				FROM phpbb_eq_dkp_raid as t1
+				LEFT JOIN phpbb_eq_dkp_raid_attendance as t2
 					ON (t2.raid_id = t1.raid_id)
 				WHERE t1.end < 0';
 			$result = $this->db->sql_query($sql);
@@ -314,7 +314,7 @@ class dkp_util
 			$this->db->sql_freeresult($result);
 			foreach ($rows as $row) {
 				if ($row['seconds_earn'] !=0 || $row['char_role'] == 2) {
-					$ppt = ($row['char_role'] == 2 ? $this->config['bum_dkp_main_dkp_per_tick'] : $this->config['bum_dkp_second_dkp_per_tick']);
+					$ppt = ($row['char_role'] == 2 ? $this->config['eq_dkp_main_dkp_per_tick'] : $this->config['eq_dkp_second_dkp_per_tick']);
 					if ($row['double_dkp'] == 1) {
 						$ppt += $ppt;
 					}
@@ -331,8 +331,8 @@ class dkp_util
 		$all_dates = array();
 		$sql = 'SELECT
 			t1.user_id, min(t2.day) as first_raid, max(t2.day) as last_raid
-			FROM phpbb_bum_dkp_raid_attendance as t1
-			JOIN phpbb_bum_dkp_raid as t2
+			FROM phpbb_eq_dkp_raid_attendance as t1
+			JOIN phpbb_eq_dkp_raid as t2
 				ON (t2.raid_id = t1.raid_id)
 			WHERE t1.char_role = '. (int) $char_role .'
 			GROUP BY t1.user_id';
@@ -350,14 +350,14 @@ class dkp_util
 	{
 		$sql = 'SELECT
 			CASE
-				WHEN c.bum_dkp_start_date IS NOT NULL
-				THEN c.bum_dkp_start_date
+				WHEN c.eq_dkp_start_date IS NOT NULL
+				THEN c.eq_dkp_start_date
 				ELSE MIN(r.day)
 				END as first
 			FROM phpbb_users c
-			JOIN phpbb_bum_dkp_raid_attendance a
+			JOIN phpbb_eq_dkp_raid_attendance a
 				ON (a.user_id = c.user_id)
-			JOIN phpbb_bum_dkp_raid r
+			JOIN phpbb_eq_dkp_raid r
 				ON (r.raid_id = a.raid_id)
 			WHERE
 				c.user_id = ' . (int) $user_id;
@@ -381,17 +381,17 @@ class dkp_util
 				);
 		// get all member IDs and first raid date
 		$sql = 'SELECT
-			c.user_id, CASE WHEN c.bum_dkp_start_date IS NOT NULL THEN c.bum_dkp_start_date ELSE min(r.day) END as first
+			c.user_id, CASE WHEN c.eq_dkp_start_date IS NOT NULL THEN c.eq_dkp_start_date ELSE min(r.day) END as first
 			FROM (
-				SELECT u.user_id, u.bum_dkp_start_date, c.char_id
+				SELECT u.user_id, u.eq_dkp_start_date, c.char_id
 				FROM phpbb_users u
-				JOIN phpbb_bum_dkp_characters c
+				JOIN phpbb_eq_dkp_characters c
 					ON (c.user_id = u.user_id and c.role = '. (int) $char_role .' and c.deleted = 0)
 				WHERE u.user_rank between 2 and 5
 				ORDER BY u.user_id) as c
-			LEFT OUTER JOIN phpbb_bum_dkp_raid_attendance a
+			LEFT OUTER JOIN phpbb_eq_dkp_raid_attendance a
 				ON (a.user_id = c.user_id and a.char_role = '. (int) $char_role .')
-			LEFT OUTER JOIN phpbb_bum_dkp_raid r
+			LEFT OUTER JOIN phpbb_eq_dkp_raid r
 				ON (r.raid_id = a.raid_id)
 			GROUP BY c.user_id';
 		$result = $this->db->sql_query($sql);
@@ -403,8 +403,8 @@ class dkp_util
 				// get total ticks, attended ticks
 				$sql = 'SELECT
 					SUM(r.raid_ticks) as total, SUM(a.ticks) as attended
-					FROM phpbb_bum_dkp_raid r
-					LEFT OUTER JOIN phpbb_bum_dkp_raid_attendance a
+					FROM phpbb_eq_dkp_raid r
+					LEFT OUTER JOIN phpbb_eq_dkp_raid_attendance a
 						ON (a.raid_id = r.raid_id AND a.user_id = ' . (int) $row['user_id'] . '
 								AND a.char_role = '. (int) $char_role .')
 					WHERE ' . $where_str . (int) $row['first'] . ' <= r.day';
@@ -421,7 +421,7 @@ class dkp_util
 			// no rollover for 2nd mains
 			if ($char_role == 2) {
 				$sql = 'SELECT full, ninety, sixty, thirty
-					FROM phpbb_bum_dkp_rollover
+					FROM phpbb_eq_dkp_rollover
 					WHERE user_id = ' . (int) $row['user_id'];
 				$result = $this->db->sql_query($sql);
 				$rollover = $this->db->sql_fetchrow($result);

@@ -8,7 +8,7 @@
  *
  */
 
-namespace bum\dkp;
+namespace eq_dkp;
 
 /**
  * DKPAddon Extension base
@@ -32,7 +32,7 @@ class ext extends \phpbb\extension\base
 			case '': // Empty means nothing has run yet
 
 				$phpbb_notifications = $this->container->get('notification_manager');
-				$phpbb_notifications->enable_notifications('bum.dkp.notification.type.dkp');
+				$phpbb_notifications->enable_notifications('eq_dkp.notification.type.dkp');
 				return 'notification';
 
 			break;
@@ -59,7 +59,7 @@ class ext extends \phpbb\extension\base
 			case '': // Empty means nothing has run yet
 
 				$phpbb_notifications = $this->container->get('notification_manager');
-				$phpbb_notifications->disable_notifications('bum.dkp.notification.type.dkp');
+				$phpbb_notifications->disable_notifications('eq_dkp.notification.type.dkp');
 				return 'notification';
 
 			break;
@@ -86,7 +86,7 @@ class ext extends \phpbb\extension\base
 			case '': // Empty means nothing has run yet
 
 				$phpbb_notifications = $this->container->get('notification_manager');
-				$phpbb_notifications->purge_notifications('bum.dkp.notification.type.dkp');
+				$phpbb_notifications->purge_notifications('eq_dkp.notification.type.dkp');
 				return 'notification';
 
 			break;

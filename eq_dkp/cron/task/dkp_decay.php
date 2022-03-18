@@ -8,7 +8,7 @@
  *
  */
 
-namespace bum\dkp\cron\task;
+namespace eq_dkp\cron\task;
 
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
@@ -43,14 +43,14 @@ class dkp_decay extends \phpbb\cron\task\base
 	{
 		// Update the cron task run time first so that it re-runs at
 		// a consistant interval
-		$this->config->set('bum_dkp_decay_last_run', time(), false);
+		$this->config->set('eq_dkp_decay_last_run', time(), false);
 
 		error_log("Running weekly DKP decay cron job");
 
 		// Run your cron actions here...
-		$decay_perc = $this->config['bum_dkp_decay_perc'];
+		$decay_perc = $this->config['eq_dkp_decay_perc'];
 
-		$dkp_util = $this->phpbb_container->get('bum.dkp.util.dkp_util');
+		$dkp_util = $this->phpbb_container->get('eq_dkp.util.dkp_util');
 
 		$all_dkp = $dkp_util->getAllDKP(0); // don't include open raid
 
@@ -89,6 +89,6 @@ class dkp_decay extends \phpbb\cron\task\base
 	 */
 	public function should_run()
 	{
-		return $this->config['bum_dkp_decay_last_run'] < time() - $this->config['bum_dkp_decay_interval'];
+		return $this->config['eq_dkp_decay_last_run'] < time() - $this->config['eq_dkp_decay_interval'];
 	}
 }

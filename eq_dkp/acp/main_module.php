@@ -8,10 +8,10 @@
  *
  */
 
-namespace bum\dkp\acp;
+namespace eq_dkp\acp;
 
-use bum\dkp\util\gen_util;
-use bum\dkp\util\eq_const;
+use eq_dkp\util\gen_util;
+use eq_dkp\util\eq_const;
 
 /**
  * DKPAddon ACP module.
@@ -29,36 +29,36 @@ class main_module
 		global $phpbb_container;
 
 		$user->add_lang(array('ucp', 'acp/users'));
-		$user->add_lang_ext('bum/dkp', 'common');
+		$user->add_lang_ext('eq_dkp', 'common');
 		$this->page_title = $user->lang('ACP_DKP_TITLE');
 		if ($mode == 'settings') {
 			$this->tpl_name = 'acp_dkp_settings';
-			add_form_key('bum/dkp');
+			add_form_key('eq_dkp');
 			if ($request->is_set_post('submit'))
 			{
-				if (!check_form_key('bum/dkp'))
+				if (!check_form_key('eq_dkp'))
 				{
 					trigger_error('FORM_INVALID', E_USER_WARNING);
 				}
 
-				$config->set('bum_dkp_seconds_earn_dkp', $request->variable('bum_dkp_seconds_earn_dkp', 0));
-				$config->set('bum_dkp_main_dkp_per_tick', $request->variable('bum_dkp_main_dkp_per_tick', 0));
-				$config->set('bum_dkp_second_dkp_per_tick', $request->variable('bum_dkp_second_dkp_per_tick', 0));
-				$config->set('bum_dkp_weekday_start', $request->variable('bum_dkp_weekday_start', 0.0));
-				$config->set('bum_dkp_weekend_start', $request->variable('bum_dkp_weekend_start', 0.0));
-				$config->set('bum_dkp_decay_perc', $request->variable('bum_dkp_decay_perc', 0));
+				$config->set('eq_dkp_seconds_earn_dkp', $request->variable('eq_dkp_seconds_earn_dkp', 0));
+				$config->set('eq_dkp_main_dkp_per_tick', $request->variable('eq_dkp_main_dkp_per_tick', 0));
+				$config->set('eq_dkp_second_dkp_per_tick', $request->variable('eq_dkp_second_dkp_per_tick', 0));
+				$config->set('eq_dkp_weekday_start', $request->variable('eq_dkp_weekday_start', 0.0));
+				$config->set('eq_dkp_weekend_start', $request->variable('eq_dkp_weekend_start', 0.0));
+				$config->set('eq_dkp_decay_perc', $request->variable('eq_dkp_decay_perc', 0));
 
 				trigger_error($user->lang('ACP_DKP_SETTING_SAVED') . adm_back_link($this->u_action));
 			}
 
 			$template->assign_vars(array(
 					'U_ACTION'                    => $this->u_action,
-					'BUM_DKP_SECONDS_EARN'        => $config['bum_dkp_seconds_earn_dkp'],
-					'BUM_DKP_MAIN_PER_TICK'       => $config['bum_dkp_main_dkp_per_tick'],
-					'BUM_DKP_SECOND_PER_TICK'     => $config['bum_dkp_second_dkp_per_tick'],
-					'BUM_DKP_DECAY_PERC'     			=> $config['bum_dkp_decay_perc'],
-					'BUM_DKP_WEEKDAY_START'       => gen_util::getTimeOptions(-1, $config['bum_dkp_weekday_start']),
-					'BUM_DKP_WEEKEND_START'       => gen_util::getTimeOptions(-1, $config['bum_dkp_weekend_start']),
+					'EQ_DKP_SECONDS_EARN'        => $config['eq_dkp_seconds_earn_dkp'],
+					'EQ_DKP_MAIN_PER_TICK'       => $config['eq_dkp_main_dkp_per_tick'],
+					'EQ_DKP_SECOND_PER_TICK'     => $config['eq_dkp_second_dkp_per_tick'],
+					'EQ_DKP_DECAY_PERC'     			=> $config['eq_dkp_decay_perc'],
+					'EQ_DKP_WEEKDAY_START'       => gen_util::getTimeOptions(-1, $config['eq_dkp_weekday_start']),
+					'EQ_DKP_WEEKEND_START'       => gen_util::getTimeOptions(-1, $config['eq_dkp_weekend_start']),
 					));
 
 		} elseif ($mode == 'characters') {
@@ -93,8 +93,8 @@ class main_module
 
 			// we get here, we have a user_id
 			$this->page_title = $user->lang('ACP_DKP_CHAR_TITLE');
-			add_form_key('bum/dkp');
-			$charlist = $phpbb_container->get('bum.dkp.util.characterlist');
+			add_form_key('eq_dkp');
+			$charlist = $phpbb_container->get('eq_dkp.util.characterlist');
 			$eq_char = $charlist->getCharacterList($user_id);
 
 			$role_opt = '';
@@ -104,13 +104,13 @@ class main_module
 
 			// user is submitting a new character
 			if ($request->is_set_post('newchar')) {
-				if (!check_form_key('bum/dkp')) {
+				if (!check_form_key('eq_dkp')) {
 					trigger_error($user->lang('FORM_INVALID'));
 				}
 
-				$char_name = $request->variable('bum_dkp_newcharname', '');
-				$char_class = $request->variable('bum_dkp_newcharclass', 0);
-				$char_role = $request->variable('bum_dkp_newcharrole', 0);
+				$char_name = $request->variable('eq_dkp_newcharname', '');
+				$char_class = $request->variable('eq_dkp_newcharclass', 0);
+				$char_role = $request->variable('eq_dkp_newcharrole', 0);
 
 				if (!$char_name) {
 					trigger_error($user->lang('ACP_DKP_NEW_CHAR_NAME_REQUIRED'));
@@ -123,13 +123,13 @@ class main_module
 				$eq_char = $charlist->getCharacterList($user_id);
 				// user is submiting modifications to one or more characters
 			} elseif ($request->is_set_post('updchar')) {
-				if (!check_form_key('bum/dkp')) {
+				if (!check_form_key('eq_dkp')) {
 					trigger_error($user->lang('FORM_INVALID'));
 				}
 				foreach ($eq_char as $row) {
-					$form_class = $request->variable('bum_dkp_changeclass_'.$row['char_id'], 0);
-					$form_role = $request->variable('bum_dkp_changerole_'.$row['char_id'], 0);
-					$form_del = $request->variable('bum_dkp_delchar_'.$row['char_id'], '');
+					$form_class = $request->variable('eq_dkp_changeclass_'.$row['char_id'], 0);
+					$form_role = $request->variable('eq_dkp_changerole_'.$row['char_id'], 0);
+					$form_del = $request->variable('eq_dkp_delchar_'.$row['char_id'], '');
 					if ($form_del == 'Delete') {
 						$charlist->remCharacter($user_id, $row['char_id']);
 					} else {

@@ -28,5 +28,5 @@ $lang = array_merge($lang, array(
 	'UCP_NEW_CHAR_CREATED' => 'Character created successfully.',
 	'UCP_CHAR_UPDATED' => 'Character information updated.',
 
-	'NOTIFICATION_TYPE_DKP'	=> 'Use Bum DKP notifications',
+	'NOTIFICATION_TYPE_DKP'	=> 'Use EQ DKP notifications',
 ));

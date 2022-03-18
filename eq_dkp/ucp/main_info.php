@@ -8,7 +8,7 @@
  *
  */
 
-namespace bum\dkp\ucp;
+namespace eq_dkp\ucp;
 
 /**
  * DKPAddon UCP module info.
@@ -18,12 +18,12 @@ class main_info
 	function module()
 	{
 		return array(
-			'filename'	=> '\bum\dkp\ucp\main_module',
+			'filename'	=> '\eq_dkp\ucp\main_module',
 			'title'		=> 'UCP_DKP_TITLE',
 			'modes'		=> array(
 				'characters'	=> array(
 					'title'	=> 'UCP_DKP',
-					'auth'	=> 'ext_bum/dkp',
+					'auth'	=> 'ext_eq_dkp',
 					'cat'	=> array('UCP_DKP_TITLE')
 				),
 			),

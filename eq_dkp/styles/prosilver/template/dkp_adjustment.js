@@ -1,16 +1,16 @@
-$.bumDKP = new Object();
+$.eqDKP = new Object();
 
 function getMain(id) {
-	if ($.bumDKP.charlist[id]) {
-	  return $.bumDKP.charlist[id].find(e => e['role'] == 2);
+	if ($.eqDKP.charlist[id]) {
+	  return $.eqDKP.charlist[id].find(e => e['role'] == 2);
 	} else {
 		return {name: "Not Found " + id};
 	}
 }
 
 function getSecond(id) {
-	if ($.bumDKP.charlist[id]) {
-	  return $.bumDKP.charlist[id].find(e => e['role'] == 1);
+	if ($.eqDKP.charlist[id]) {
+	  return $.eqDKP.charlist[id].find(e => e['role'] == 1);
 	} else {
 		return {name: "Not Found " + id};
 	}
@@ -21,10 +21,10 @@ function submitAll( event ) {
 	$.ajax({
 		type: 'post',
 		dataType: 'json',
-		url: bumDKPbulkadj,
-		data: JSON.stringify($.bumDKP.adjustments),
+		url: eqDKPbulkadj,
+		data: JSON.stringify($.eqDKP.adjustments),
 		success: function (data) {
-			$.bumDKP.adjustments.length = 0;
+			$.eqDKP.adjustments.length = 0;
 			displayPreview();
 			},
 		error: function (data) {
@@ -37,9 +37,9 @@ function submitAll( event ) {
 function getCharacterData() {
 	$.ajax({
 		type: 'post',
-		url: bumDKPcharlist,
+		url: eqDKPcharlist,
 		success: function (data) {
-			$.bumDKP.charlist = data;
+			$.eqDKP.charlist = data;
 			},
 		error: function (data) {
 			console.log('An error occurred.');
@@ -51,9 +51,9 @@ function getCharacterData() {
 function getAllDKP() {
 	$.ajax({
 		type: 'post',
-		url: bumDKPgetalldkp,
+		url: eqDKPgetalldkp,
 		success: function (data) {
-			$.bumDKP.dkp = data;
+			$.eqDKP.dkp = data;
 			},
 		error: function (data) {
 			console.log('An error occurred.');
@@ -65,13 +65,13 @@ function getAllDKP() {
 function displayPreview() {
 	var adjDisplayElement = $("#adjpreview");
 	adjDisplayElement.empty();
-	if ($.bumDKP.adjustments.length > 0) {
+	if ($.eqDKP.adjustments.length > 0) {
 		// two column display
-		var midpoint = Math.floor($.bumDKP.adjustments.length/2);
+		var midpoint = Math.floor($.eqDKP.adjustments.length/2);
 		var div = $('<div/>', { style: 'width: 395px; float: left; margin: 2px;' });
 		var table = createTable(['Character', 'Description', 'Amount', 'Pool']);
 		div.append(table);
-		for (var i = 0; i < $.bumDKP.adjustments.length; i++) {
+		for (var i = 0; i < $.eqDKP.adjustments.length; i++) {
 			if (i == midpoint && i != 0) {
 				// setup a new div
 				adjDisplayElement.append(div);
@@ -81,10 +81,10 @@ function displayPreview() {
 			}
 			var rowCnt = i < midpoint ? i : i-midpoint;
 			var rowClass = (rowCnt%2 == 0 ? 'bg1' : 'bg2');
-			var user_id = $.bumDKP.adjustments[i].user_id;
-			var desc = $.bumDKP.adjustments[i].desc;
-			var pool = $.bumDKP.adjustments[i].pool;
-			var value = $.bumDKP.adjustments[i].value;
+			var user_id = $.eqDKP.adjustments[i].user_id;
+			var desc = $.eqDKP.adjustments[i].desc;
+			var pool = $.eqDKP.adjustments[i].pool;
+			var value = $.eqDKP.adjustments[i].value;
 			var adjRow = $('<tr/>', {
 					'class': rowClass,
 					'data-adjid': i,
@@ -106,7 +106,7 @@ function displayPreview() {
 
 function adjRemoveClicked( event ) {
 	var adjID = $( this ).closest('tr').attr('data-adjid');
-	$.bumDKP.adjustments.splice(adjID, 1);
+	$.eqDKP.adjustments.splice(adjID, 1);
 	displayPreview();
 	event.stopPropagation();
 }
@@ -115,7 +115,7 @@ function calcValue(adjvalue, adjid, pool) {
 	if (pool == 1 && getSecond(adjid) == undefined) {
 		return;
 	}
-	var cVal = $.bumDKP.dkp[adjid][pool];
+	var cVal = $.eqDKP.dkp[adjid][pool];
 	var result = new Object();
 
 	// check if it's 'ticks' based
@@ -152,11 +152,11 @@ function calcValue(adjvalue, adjid, pool) {
 
 function getUserID(charName) {
 	var query = charName.toLowerCase();
-	var userIDs = Object.keys($.bumDKP.charlist);
+	var userIDs = Object.keys($.eqDKP.charlist);
 	for (var i = 0; i < userIDs.length; i++) {
 		var uid = userIDs[i];
-		for (var x = 0; x < $.bumDKP.charlist[uid].length; x++) {
-			if ($.bumDKP.charlist[uid][x].name.toLowerCase() == query) {
+		for (var x = 0; x < $.eqDKP.charlist[uid].length; x++) {
+			if ($.eqDKP.charlist[uid][x].name.toLowerCase() == query) {
 				// have a match, add to data
 				return uid;
 			}
@@ -203,7 +203,7 @@ function parseFile( event ) {
 		if (uid && $.inArray(uid, seenID) == -1) {
 			seenID.push(uid);
 			// valid char add to stored data
-			$.bumDKP.fileData.push({
+			$.eqDKP.fileData.push({
 					'user_id': uid,
 					'name': charname,
 					'value': fileAdj
@@ -236,7 +236,7 @@ function postSingle(adjvalue, adjid, adjdesc, pool) {
 	}
 	$.ajax({
 			type: 'post',
-			url: bumDKPaddadj,
+			url: eqDKPaddadj,
 			data: {
 				'user_id': adjid,
 				'adjdesc': adjdesc + valueInfo.optdesc,
@@ -244,7 +244,7 @@ function postSingle(adjvalue, adjid, adjdesc, pool) {
 				'adjamnt': valueInfo.value
 				},
 			success: function (data) {
-				$.bumDKP.fileData.length = 0;
+				$.eqDKP.fileData.length = 0;
 				$('#adjid').val("");
 				$('#dkp_adjustment')[0].reset();
 			},
@@ -260,7 +260,7 @@ function adjDKP(adjvalue, adjid, adjdesc, pool) {
 	if (valueInfo == undefined) {
 		return;
 	}
-	$.bumDKP.adjustments.push({
+	$.eqDKP.adjustments.push({
 			'user_id': adjid,
 			'desc': adjdesc + valueInfo.optdesc,
 			'pool': pool,
@@ -291,7 +291,7 @@ function addAdjustment( event ) {
 	var adjdesc = $('#adjdesc').val();
 	var adjname = $('#adjname').val();
 
-	if ($('#adjfile').val() && $.bumDKP.fileData.length > 0) {
+	if ($('#adjfile').val() && $.eqDKP.fileData.length > 0) {
 		// a file was attached and parsed into fileData
 		// use that for a bulk adjustment
 		// make sure adjdesc is set at a minimum
@@ -300,11 +300,11 @@ function addAdjustment( event ) {
 			return;
 		}
 		// iterate through fileData applying the adjustments
-		for (var i = 0; i < $.bumDKP.fileData.length; i++) {
-			var uid = $.bumDKP.fileData[i].user_id;
-			var fileValue = $.bumDKP.fileData[i].value;
+		for (var i = 0; i < $.eqDKP.fileData.length; i++) {
+			var uid = $.eqDKP.fileData[i].user_id;
+			var fileValue = $.eqDKP.fileData[i].value;
 			if (!adjvalue && !fileValue) {
-				alert('No adjustment value set in the form or the file for user: ' + $.bumDKP.fileData[i].name);
+				alert('No adjustment value set in the form or the file for user: ' + $.eqDKP.fileData[i].name);
 				return;
 			}
 			if (adjmain) {
@@ -323,7 +323,7 @@ function addAdjustment( event ) {
 		if (!adjid && !adjname) {
 			// bulk adjustment to all members
 			console.log('bulk adjustment');
-			var userIDs = Object.keys($.bumDKP.dkp);
+			var userIDs = Object.keys($.eqDKP.dkp);
 			for (var i = 0; i < userIDs.length; i++) {
 				var uid = userIDs[i];
 				if (adjmain) {
@@ -352,7 +352,7 @@ function addAdjustment( event ) {
 			}
 		}
 	}
-	$.bumDKP.fileData.length = 0;
+	$.eqDKP.fileData.length = 0;
 	$('#adjid').val("");
 	$('#dkp_adjustment')[0].reset();
 	displayPreview();
@@ -408,14 +408,14 @@ function submitSingle( event ) {
 
 function searchChar(request, response) {
 	var query = request.term.toLowerCase();
-	var userIDs = Object.keys($.bumDKP.charlist);
+	var userIDs = Object.keys($.eqDKP.charlist);
 	var data = new Array();
 	for (var i = 0; i < userIDs.length; i++) {
 		var uid = userIDs[i];
-		for (var x = 0; x < $.bumDKP.charlist[uid].length; x++) {
-			if ($.bumDKP.charlist[uid][x].name.toLowerCase().startsWith(query)) {
+		for (var x = 0; x < $.eqDKP.charlist[uid].length; x++) {
+			if ($.eqDKP.charlist[uid][x].name.toLowerCase().startsWith(query)) {
 				// have a match, add to data
-				data.push({'label': $.bumDKP.charlist[uid][x].name, 'value': uid});
+				data.push({'label': $.eqDKP.charlist[uid][x].name, 'value': uid});
 			}
 		}
 	}
@@ -426,8 +426,8 @@ function adjReadyFn( jQuery ) {
 	getCharacterData();
 	getAllDKP();
 
-	$.bumDKP.adjustments = new Array();
-	$.bumDKP.fileData = new Array();
+	$.eqDKP.adjustments = new Array();
+	$.eqDKP.fileData = new Array();
 	$("#previewadj").on("click", addAdjustment );
 	$("#submitadj").on("click", submitAll );
 	$("#submitsingle").on("click", submitSingle );

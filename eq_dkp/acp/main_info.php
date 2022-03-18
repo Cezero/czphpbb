@@ -8,7 +8,7 @@
  *
  */
 
-namespace bum\dkp\acp;
+namespace eq_dkp\acp;
 
 /**
  * DKPAddon ACP module info.
@@ -18,17 +18,17 @@ class main_info
 	function module()
 	{
 		return array(
-			'filename'	=> '\bum\dkp\acp\main_module',
+			'filename'	=> '\eq_dkp\acp\main_module',
 			'title'		=> 'ACP_DKP_TITLE',
 			'modes'		=> array(
 				'settings'	=> array(
 					'title'	=> 'ACP_DKP_SETTINGS',
-					'auth'	=> 'ext_bum/dkp && acl_a_board',
+					'auth'	=> 'ext_eq_dkp && acl_a_board',
 					'cat'	=> array('ACP_DKP_TITLE')
 				),
 				'characters'	=> array(
 					'title'	=> 'ACP_DKP_CHARACTERS',
-					'auth'	=> 'ext_bum/dkp && acl_a_board',
+					'auth'	=> 'ext_eq_dkp && acl_a_board',
 					'cat'	=> array('ACP_DKP_TITLE')
 				),
 			),
