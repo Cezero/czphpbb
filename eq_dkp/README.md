@@ -2,7 +2,7 @@
 
 ## Installation
 
-Copy the extension to phpBB/ext/bum/dkp
+Copy the extension to phpBB/ext/eq_dkp
 
 Go to "ACP" > "Customise" > "Extensions" and enable the "DKPAddon" extension.
 
