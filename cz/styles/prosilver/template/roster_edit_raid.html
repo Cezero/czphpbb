@@ -1,0 +1,112 @@
+<!-- INCLUDE overall_header.html -->
+<!-- INCLUDEJS jquery-ui/jquery-ui.min.js -->
+<!-- INCLUDEJS eq_dkp_util.js -->
+<!-- INCLUDEJS roster_raid.js -->
+<!-- INCLUDECSS jquery-ui/jquery-ui.min.css -->
+<!-- INCLUDECSS ../theme/custom.css -->
+<script type="text/javascript">
+var eqDKPitemqueryurl = '{U_ITEM_QUERY}';
+var eqDKPcharlist = '{U_CHARLIST}';
+var eqDKPitemlist = '{U_ITEMLIST}';
+var eqDKPawarditemurl = '{U_AWARD_ITEM}';
+var eqDKPviewitemurl = '{U_VIEW_ITEM}';
+var eqDKPdelitemurl = '{U_DEL_ITEM}';
+var eqDKPweekendstart = '{V_WEEKEND_START}';
+var eqDKPweekdaystart = '{V_WEEKDAY_START}';
+var eqDKPraid_id = {RAID_ID};
+</script>
+<div style="width: 100%; overflow: hidden;">
+<div style="width: 150px; float: left;">
+<!-- INCLUDE roster_menu.html -->
+</div>
+<div style="margin-left: 151px;">
+<h2 class="solo">{PAGE_TITLE}</h2>
+<form id="roster_add_raid" method="post" action="{U_ADD_RAID}" enctype="multipart/form-data">
+	<input type="hidden" name="raidid" id="raidid" value="{RAID_ID}"/>
+	<fieldset>
+	<label for="eq_dkp_raiddescription"><strong>Raid Description{L_COLON}</strong></label>&nbsp;
+	<input type="text" class="inputbox autowidth" id="eq_dkp_raiddescription" name="eq_dkp_raiddescription" size="80" maxlength="120" value="{RAID_DESC}" />
+	<br/>
+	<label for="eq_dkp_raiddate"><strong>Raid Date{L_COLON}</strong></label>&nbsp;
+	<input type="text" name="eq_dkp_raiddate" id="eq_dkp_raiddate" value="{RAID_DATE}" />&nbsp;
+	<label for="eq_dkp_raidstart"><strong>Start Time{L_COLON}</strong></label>&nbsp;
+	<select name="eq_dkp_raidstart" id="eq_dkp_raidstart">{RAID_START_OPTIONS}</select>&nbsp;
+	<label for="eq_dkp_raidend"><strong>End Time{L_COLON}</strong></label>&nbsp;
+	<select name="eq_dkp_raidend" id="eq_dkp_raidend">{RAID_END_OPTIONS}</select><br/>
+	<label for="eq_dkp_double"><strong>Double DKP{L_COLON}</strong></label>
+	<input type="checkbox" id="eq_dkp_double" name="eq_dkp_double" value="1"{DOUBLE_CHECKED}/>&nbsp;&nbsp;
+	<label for="eq_dkp_seconds_earn"><strong>Second Mains Earn DKP{L_COLON}</strong></label>
+	<input type="checkbox" id="eq_dkp_seconds_earn" name="eq_dkp_seconds_earn" value="1"{SECONDS_CHECKED}/>
+	</fieldset><br/>
+	<input type="submit" name="addraid" value="{L_ADD_RAID}" class="button1" />
+	<br/>
+	<br/>
+	<div>
+		<div class="forumbg forumbg-table" style="width: 640px; overflow: auto;"/>
+			<table class="table2">
+				<thead>
+					<tr><th class="text-button togglelist" id="item">{L_ITEMS}</th></tr>
+				</thead>
+			</table>
+			<div id="itemlist" class="attendance-table"/>
+			</div>
+		</div>
+		<!-- BEGIN characters -->
+		<div class="forumbg forumbg-table" style="width: 640px; overflow: auto;"/>
+		<table class="table2">
+		<thead>
+			<tr><th class="text-button togglelist" id="{characters.TYPE}">{characters.L_TYPE}</th></tr>
+		</thead>
+		</table>
+			<div id="{characters.TYPE}list" class="attendance-table"/>
+			<!-- BEGIN col -->
+				<div style="width: 320px; float: left;">
+				<table class="table2">
+				<thead>
+					<tr>
+						<th class="name">{L_CHAR_NAME}</th>
+						<th class="center">{L_ATTENDANCE}</th>
+					</tr>
+				</thead>
+				<tbody>
+					<!-- BEGIN row -->
+					<tr class="<!-- IF characters.col.row.S_ROW_COUNT is even -->bg1<!-- ELSE -->bg2<!-- ENDIF -->" data-userid="{characters.col.row.USER_ID}" data-role="{characters.col.row.ROLE}">
+						<!-- IF characters.col.row.ROLE == 2 --><input type="hidden" name="{characters.col.row.USER_AS_ID}" id="{characters.col.row.USER_AS_ID}" value="{characters.col.row.AS_CHAR_ID}" /><!-- ENDIF -->
+						<input type="hidden" name="{characters.col.row.USER_TIME_ID}" id="{characters.col.row.USER_TIME_ID}" value="{characters.col.row.USER_TIMES_VAL}" />
+						<td>
+							<span id="{characters.col.row.NAME_DISP_ID}" class="eq_dkp_name_display"></span>
+						</td>
+						<td class="center">
+							<span id="{characters.col.row.USER_DISP_ID}" class="eq_dkp_attend_display"></span>
+						</td>
+					</tr>
+					<!-- END row -->
+				</tbody>
+				</table>
+				</div>
+			<!-- END col -->
+			</div>
+		</div>
+		<!-- END characters -->
+	</div>
+	<br/><br/>
+	<p>You can optionally attach a raid dump.  If you do, and leave the raid date and start time unset, they
+	will be automatically populated from the raid-dump filename.</p>
+	<p>Members present in the raid dump, but not already present in this raid will have their start time
+	updated.  Unless "Merge Dump" is selected, members present in the raid but missing from the dump will
+	have their end time updated.  Use "Merge Dump" if you are simply adding new members to the raid overall (for example, after splitting the raid forces and adding in second mains).</p>
+	<label for="raiddump"><strong>Attach a raid dump{L_COLON}</strong></label>
+	<input type="file" name="raiddump" id="raiddump" accept="text/plain"/><br/>
+	<label for="eq_dkp_merge_dump"><strong>Merge Dump{L_COLON}</strong></label>
+	<input type="checkbox" id="eq_dkp_merge_dump" name="eq_dkp_merge_dump" value="1"/>&nbsp;&nbsp;
+	<br/>
+	<input type="submit" name="addraid" value="{L_ADD_RAID}" class="button1" />
+	<fieldset>
+	{S_HIDDEN_FIELDS}
+	{S_FORM_TOKEN}
+	</fieldset>
+</form>
+</div>
+</div>
+<!-- INCLUDE jumpbox.html -->
+<!-- INCLUDE overall_footer.html -->

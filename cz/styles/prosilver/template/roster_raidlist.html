@@ -1,0 +1,71 @@
+<!-- INCLUDE overall_header.html -->
+<!-- INCLUDECSS custom.css -->
+<!-- INCLUDEJS roster_raidlist.js -->
+<div style="width: 100%; overflow: hidden;">
+<div style="width: 150px; float: left;">
+<!-- INCLUDE roster_menu.html -->
+</div>
+<div style="margin-left: 151px;">
+<h2 class="solo">{PAGE_TITLE}</h2>
+
+	<div class="action-bar bar-top">
+		<div class="pagination">
+			{TOTAL_RAIDS}
+			<!-- IF .pagination -->
+				<!-- INCLUDE pagination.html -->
+			<!-- ELSE -->
+				 &bull; {PAGE_NUMBER}
+			<!-- ENDIF -->
+		</div>
+	</div>
+
+	<div class="forumbg forumbg-table">
+		<div class="inner">
+		<table class="table1" id="raidlist">
+		<thead>
+		<tr>
+			<th class="name"><a title="{L_SORT_RAIDDATE}" href="{U_SORT_RAIDDATE}">{L_RAIDDATE}</a></th>
+			<th class="name"><a title="{L_SORT_RAIDDESC}" href="{U_SORT_RAIDDESC}">{L_RAIDDESC}</a></th>
+			<th class="posts"><a title="{L_SORT_RAIDTICKS}" href="{U_SORT_RAIDTICKS}">{L_RAIDTICKS}</a></th>
+			<th class="posts"><a title="{L_SORT_RAIDDKP}" href="{U_SORT_RAIDDKP}">{L_RAIDDKP}</a></th>
+			<th class="posts"><a title="{L_SORT_MPRESENT}" href="{U_SORT_MPRESENT}">{L_MPRESENT}</a></th>
+			<th class="posts"><a title="{L_SORT_LOOT}" href="{U_SORT_LOOT}">{L_LOOT}</a></th>
+			<!-- IF IS_OFFICER --><th class="posts">Editing</th><!-- ENDIF -->
+		</tr>
+		</thead>
+		<tbody>
+		<!-- BEGIN raidrow -->
+	<tr class="<!-- IF raidrow.S_ROW_COUNT is even -->bg1<!-- ELSE -->bg2<!-- ENDIF -->">
+		<td><a href="{raidrow.U_VIEW_RAID}">{raidrow.DATE}</a></td>
+		<td><a href="{raidrow.U_VIEW_RAID}">{raidrow.DESC}</a></td>
+		<td class="posts">{raidrow.TICKS}</td>
+		<td class="posts">{raidrow.DKP}</td>
+		<td class="posts">{raidrow.MCOUNT}</td>
+		<td class="posts">{raidrow.LCOUNT}</td>
+		<!-- IF IS_OFFICER --><td class="posts"><a class="button button-icon-only" title="{L_EDIT_RAID}" href="{raidrow.U_EDIT_RAID}"><i class="icon fa-pencil fa-fw"></i></a>&nbsp;<a class="button button-icon-only confirmation" title="{L_DEL_RAID}" href="{raidrow.U_DEL_RAID}"><i class="icon fa-times fa-fw"></i></a></td><!-- ENDIF -->
+	</tr>
+		<!-- BEGINELSE -->
+	<tr class="bg1">
+		<td colspan="5">{L_NO_RAIDS}</td>
+	</tr>
+		<!-- END raidrow -->
+	</tbody>
+	</table>
+
+	</div>
+</div>
+
+<div class="action-bar bar-bottom">
+	<div class="pagination">
+		{TOTAL_RAIDS}
+		<!-- IF .pagination -->
+			<!-- INCLUDE pagination.html -->
+		<!-- ELSE -->
+			 &bull; {PAGE_NUMBER}
+		<!-- ENDIF -->
+	</div>
+</div>
+</div>
+</div>
+<!-- INCLUDE jumpbox.html -->
+<!-- INCLUDE overall_footer.html -->

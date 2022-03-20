@@ -1,0 +1,108 @@
+table.table2 {
+	width: 100%;
+}
+
+.ucp-main table.table2 {
+	padding: 2px;
+}
+
+table.table2 thead th {
+	color: #FFFFFF;
+	font-weight: normal;
+	text-transform: uppercase;
+	line-height: 1.3em;
+	font-size: 1em;
+	padding: 0 0 4px 3px;
+}
+
+table.table2 thead th span {
+	padding-left: 7px;
+}
+
+table.table2 tbody tr {
+	border: 1px solid transparent;
+}
+
+table.table2 td {
+	font-size: 1.1em;
+}
+
+table.table2 tbody td {
+	padding: 5px;
+	border-top: 1px solid transparent;
+}
+
+table.table2 tbody th {
+	padding: 5px;
+	border-bottom: 1px solid transparent;
+	text-align: left;
+}
+
+/* Specific column styles */
+table.table2 .name    { text-align: left; }
+table.table2 .center    { text-align: center; }
+table.table2 .reportby  { width: 15%; }
+table.table2 .posts   { text-align: center; width: 7%; }
+table.table2 .joined  { text-align: left; width: 15%; }
+table.table2 .active  { text-align: left; width: 15%; }
+table.table2 .mark    { text-align: center; width: 7%; }
+table.table2 .info    { text-align: left; width: 30%; }
+table.table2 .info div  { width: 100%; white-space: normal; overflow: hidden; }
+table.table2 .autocol { line-height: 2em; white-space: nowrap; }
+table.table2 thead .autocol { padding-left: 1em; }
+
+table.table1 .dkp { text-align: center; width: 10%; font-size: 1em; }
+table.table2 .adjust { font-size: 1em; }
+table.table2 .adjustdesc { font-size: .9em; }
+
+table.table2 span.rank-img {
+	float: right;
+	width: auto;
+}
+
+.charas-text {
+	font-size: .8em;
+	font-style: italic;
+}
+
+.text-button {
+	cursor: pointer;
+}
+
+.text-button:hover {
+	color: #FFDB82;
+	background-color: #670404;
+}
+
+.ui-selectmenu-menu .ui-menu {
+	max-height: 200px;
+}
+
+fieldset.dkpadjust {
+	display: inline;
+	border: 1px solid #980415;
+	padding: 0.35em 0.625em 0.75em;
+}
+
+legend.dkpadjust {
+	padding: 1px;
+}
+
+ul.dkpadjust {
+	margin: 0;
+	padding: 0;
+	list-style-type: none;
+}
+
+ul.dkpadjust > li {
+	position: relative;
+	padding-left: 12px;
+}
+
+ul.dkpadjust > li:before {
+	content: "\2022";
+	line-height: 0;
+	position: absolute;
+	top: .55em;
+	left: 0;
+}
