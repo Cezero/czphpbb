@@ -1,0 +1,78 @@
+services:
+    eq_dkp.util.characterlist:
+        class: eq_dkp\util\characterlist
+        arguments:
+            - '@dbal.conn'
+            - '@user'
+            - '%core.table_prefix%'
+
+    eq_dkp.util.dkp_util:
+        class: eq_dkp\util\dkp_util
+        arguments:
+            - '@config'
+            - '@dbal.conn'
+            - '@user'
+
+    eq_dkp.controller:
+        class: eq_dkp\controller\main
+        arguments:
+            - '@config'
+            - '@dbal.conn'
+            - '@controller.helper'
+            - '@template'
+            - '@service_container'
+            - '@request'
+            - '@user'
+            - '%core.table_prefix%'
+
+    eq_dkp.listener.main:
+        class: eq_dkp\event\main_listener
+        arguments:
+            - '@controller.helper'
+            - '@template'
+            - '@user'
+            - '%core.php_ext%'
+        tags:
+            - { name: event.listener }
+
+    eq_dkp.listener.profile:
+        class: eq_dkp\event\profile_listener
+        arguments:
+            - '@controller.helper'
+            - '@template'
+            - '@user'
+            - '@eq_dkp.util.characterlist'
+            - '%core.php_ext%'
+        tags:
+            - { name: event.listener }
+
+    eq_dkp.cron.task.dkp:
+        class: eq_dkp\cron\task\dkp_decay
+        arguments:
+            - '@config'
+            - '@dbal.conn'
+            - '@service_container'
+        calls:
+            - [set_name, [cron.task.dkp_decay]]
+        tags:
+            - { name: cron.task }
+
+    eq_dkp.notification.type.dkp:
+        class: eq_dkp\notification\type\dkp
+        scope: prototype # scope MUST be prototype for this to work!
+        arguments:
+            - '@user_loader'
+            - '@dbal.conn'
+            - '@cache.driver'
+            - '@user'
+            - '@auth'
+            - '@config'
+            - '%core.root_path%'
+            - '%core.php_ext%'
+            - '%tables.notification_types%'
+            - '%tables.notifications%'
+            - '%tables.user_notifications%'
+        calls:
+            - [set_controller_helper, ['@controller.helper']]
+        tags:
+            - { name: notification.type }
