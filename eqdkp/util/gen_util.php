@@ -1,6 +1,6 @@
 <?php
 
-namespace eq_dkp\util;
+namespace eqdkp\util;
 
 use \DateTime;
 use \DateTimeZone;

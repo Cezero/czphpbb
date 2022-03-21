@@ -17,9 +17,9 @@
 							<fieldset>
 							<tr class="<!-- IF charlist.S_ROW_COUNT is even -->bg1<!-- ELSE -->bg2<!-- ENDIF -->">
 								<td class="username">{charlist.NAME}</td>
-								<td class="info"><select name="eq_dkp_changeclass_{charlist.ID}">{charlist.CLASS_OPTIONS}</select></td>
-								<td class="info"><select name="eq_dkp_changerole_{charlist.ID}">{charlist.ROLE_OPTIONS}</select></td>
-								<td class="center"><input type="checkbox" name="eq_dkp_delchar_{charlist.ID}" value="Delete"/></td>
+								<td class="info"><select name="eqdkp_changeclass_{charlist.ID}">{charlist.CLASS_OPTIONS}</select></td>
+								<td class="info"><select name="eqdkp_changerole_{charlist.ID}">{charlist.ROLE_OPTIONS}</select></td>
+								<td class="center"><input type="checkbox" name="eqdkp_delchar_{charlist.ID}" value="Delete"/></td>
 							</tr>
 							</fieldset>
 							<!-- END charlist -->
@@ -33,12 +33,12 @@
 	</div>
 	<div class="panel">
 		<fieldset>
-			<label for="eq_dkp_newcharname">{L_CHAR_NAME}{L_COLON}</label>&nbsp;
-			<input type="text" class="inputbox autowidth" name="eq_dkp_newcharname" id="eq_dkp_newcharname" size="20" maxlength="40" value="" />&nbsp;
-			<label for="eq_dkp_newcharclass">{L_CHAR_CLASS}{L_COLON}</label>&nbsp;
-			<select name="eq_dkp_newcharclass" id="eq_dkp_newcharclass">{S_CLASS_OPTIONS}</select>&nbsp;
-			<label for="eq_dkp_newcharrole">{L_CHAR_ROLE}{L_COLON}</label>&nbsp;
-			<select name="eq_dkp_newcharrole" id="eq_dkp_newcharrole">{S_ROLE_OPTIONS}</select>&nbsp;
+			<label for="eqdkp_newcharname">{L_CHAR_NAME}{L_COLON}</label>&nbsp;
+			<input type="text" class="inputbox autowidth" name="eqdkp_newcharname" id="eqdkp_newcharname" size="20" maxlength="40" value="" />&nbsp;
+			<label for="eqdkp_newcharclass">{L_CHAR_CLASS}{L_COLON}</label>&nbsp;
+			<select name="eqdkp_newcharclass" id="eqdkp_newcharclass">{S_CLASS_OPTIONS}</select>&nbsp;
+			<label for="eqdkp_newcharrole">{L_CHAR_ROLE}{L_COLON}</label>&nbsp;
+			<select name="eqdkp_newcharrole" id="eqdkp_newcharrole">{S_ROLE_OPTIONS}</select>&nbsp;
 			<input type="submit" name="newchar" value="Add Character" class="button1" />
 		</fieldset>
 	</div>

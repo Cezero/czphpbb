@@ -8,10 +8,10 @@
  *
  */
 
-namespace eq_dkp\controller;
+namespace eqdkp\controller;
 
-use eq_dkp\util\eq_const;
-use eq_dkp\util\gen_util;
+use eqdkp\util\eq_const;
+use eqdkp\util\gen_util;
 
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
@@ -25,7 +25,7 @@ class main
 	/* @var \phpbb\config\config */
 	protected $config;
 
-	/* @var \eq_dkp\util\roster */
+	/* @var \eqdkp\util\roster */
 	protected $roster;
 
 	/* @var \phpbb\controller\helper */
@@ -66,10 +66,10 @@ class main
 		$this->phpbb_container = $phpbb_container;
 		$this->user = $user;
 		$this->table_prefix = $table_prefix;
-		$this->char_table = $table_prefix . 'eq_dkp_characters';
-		$this->raid_table = $table_prefix . 'eq_dkp_raid';
-		$this->loot_table = $table_prefix . 'eq_dkp_raid_loot';
-		$this->attendance_table = $table_prefix . 'eq_dkp_raid_attendance';
+		$this->char_table = $table_prefix . 'eqdkp_characters';
+		$this->raid_table = $table_prefix . 'eqdkp_raid';
+		$this->loot_table = $table_prefix . 'eqdkp_raid_loot';
+		$this->attendance_table = $table_prefix . 'eqdkp_raid_attendance';
 	}
 
 	/**
@@ -83,8 +83,8 @@ class main
 	{
 		// get containers
 		$pagination = $this->phpbb_container->get('pagination');
-		$dkp_util = $this->phpbb_container->get('eq_dkp.util.dkp_util');
-		$characterlist = $this->phpbb_container->get('eq_dkp.util.characterlist');
+		$dkp_util = $this->phpbb_container->get('eqdkp.util.dkp_util');
+		$characterlist = $this->phpbb_container->get('eqdkp.util.characterlist');
 
 		$class_types = range(0, 15); // default to all classes
 
@@ -94,24 +94,24 @@ class main
 		// common to all views, setup menu
 		// and urls to AJAX requests
 		$this->template->assign_vars(array(
-					'U_ITEM_QUERY' => $this->helper->route('eq_dkp_controller', array('name' => 'item_query')),
-					'U_CHAR_QUERY' => $this->helper->route('eq_dkp_controller', array('name' => 'char_query')),
-					'U_AWARD_ITEM' => $this->helper->route('eq_dkp_controller', array('name' => 'award_item')),
-					'U_DEL_ITEM' => $this->helper->route('eq_dkp_controller', array('name' => 'remove_item')),
-					'U_DEL_ADJ' => $this->helper->route('eq_dkp_controller', array('name' => 'deladj')),
-					'U_ADD_ADJ' => $this->helper->route('eq_dkp_controller', array('name' => 'addadj')),
-					'U_BULK_ADJ' => $this->helper->route('eq_dkp_controller', array('name' => 'bulkadj')),
-					'U_CHARLIST' => $this->helper->route('eq_dkp_controller', array('name' => 'charlist')),
-					'U_FULLCHARLIST' => $this->helper->route('eq_dkp_controller', array('name' => 'fullcharlist')),
-					'U_GETALLDKP' => $this->helper->route('eq_dkp_controller', array('name' => 'getalldkp')),
-					'U_ITEMLIST' => $this->helper->route('eq_dkp_controller', array('name' => 'item_list')),
-					'U_VIEW_ITEM' => $this->helper->route('eq_dkp_controller', array('name' => 'viewitem')),
-					'V_WEEKEND_START' => $this->config['eq_dkp_weekend_start'],
-					'V_WEEKDAY_START' => $this->config['eq_dkp_weekday_start'],
-					'V_MAINTICK' => $this->config['eq_dkp_main_dkp_per_tick'],
-					'V_SECONDTICK' => $this->config['eq_dkp_second_dkp_per_tick'],
-					'U_ROSTER' => $this->helper->route('eq_dkp_controller', array('name' => 'roster')),
-					'U_RAID_LIST' => $this->helper->route('eq_dkp_controller', array('name' => 'raidlist')),
+					'U_ITEM_QUERY' => $this->helper->route('eqdkp_controller', array('name' => 'item_query')),
+					'U_CHAR_QUERY' => $this->helper->route('eqdkp_controller', array('name' => 'char_query')),
+					'U_AWARD_ITEM' => $this->helper->route('eqdkp_controller', array('name' => 'award_item')),
+					'U_DEL_ITEM' => $this->helper->route('eqdkp_controller', array('name' => 'remove_item')),
+					'U_DEL_ADJ' => $this->helper->route('eqdkp_controller', array('name' => 'deladj')),
+					'U_ADD_ADJ' => $this->helper->route('eqdkp_controller', array('name' => 'addadj')),
+					'U_BULK_ADJ' => $this->helper->route('eqdkp_controller', array('name' => 'bulkadj')),
+					'U_CHARLIST' => $this->helper->route('eqdkp_controller', array('name' => 'charlist')),
+					'U_FULLCHARLIST' => $this->helper->route('eqdkp_controller', array('name' => 'fullcharlist')),
+					'U_GETALLDKP' => $this->helper->route('eqdkp_controller', array('name' => 'getalldkp')),
+					'U_ITEMLIST' => $this->helper->route('eqdkp_controller', array('name' => 'item_list')),
+					'U_VIEW_ITEM' => $this->helper->route('eqdkp_controller', array('name' => 'viewitem')),
+					'V_WEEKEND_START' => $this->config['eqdkp_weekend_start'],
+					'V_WEEKDAY_START' => $this->config['eqdkp_weekday_start'],
+					'V_MAINTICK' => $this->config['eqdkp_main_dkp_per_tick'],
+					'V_SECONDTICK' => $this->config['eqdkp_second_dkp_per_tick'],
+					'U_ROSTER' => $this->helper->route('eqdkp_controller', array('name' => 'roster')),
+					'U_RAID_LIST' => $this->helper->route('eqdkp_controller', array('name' => 'raidlist')),
 					));
 
 		$is_officer = 0;
@@ -145,7 +145,7 @@ class main
 				$name_prefix = $this->request->variable('term', '');
 				if ($name_prefix) {
 					$sql = 'SELECT char_name as label, user_id as value
-						FROM phpbb_eq_dkp_characters
+						FROM phpbb_eqdkp_characters
 						WHERE char_name LIKE \'' . $this->db->sql_escape($name_prefix) . '%\'
 						LIMIT 20';
 					$result = $this->db->sql_query($sql);
@@ -393,7 +393,7 @@ class main
 					trigger_error($this->user->lang['INVALID_USER_ID']);
 				}
 				$char_info = $characterlist->getCharacterByRole($user_id, $role == 0 ? 2 : 1);
-				$page_title = $this->user->lang['EQ_DKP_DETAILS'] . ': ' . $char_info['char_name'];
+				$page_title = $this->user->lang['EQDKP_DETAILS'] . ': ' . $char_info['char_name'];
 
 				$template_name = 'roster_dkpdetail.html';
 
@@ -458,8 +458,8 @@ class main
 					$sort_params[] = "filter_type=$filter_type";
 				}
 
-				$pagination_url = append_sid($this->helper->route('eq_dkp_controller', array('name' => 'dkpdetail')), implode('&amp;', $params));
-				$sort_url = append_sid($this->helper->route('eq_dkp_controller', array('name' => 'dkpdetail')), implode('&amp;', $sort_params));
+				$pagination_url = append_sid($this->helper->route('eqdkp_controller', array('name' => 'dkpdetail')), implode('&amp;', $params));
+				$sort_url = append_sid($this->helper->route('eqdkp_controller', array('name' => 'dkpdetail')), implode('&amp;', $sort_params));
 				$start = $pagination->validate_start($start, 100, $total_entries);
 
 				unset($sort_params);
@@ -470,7 +470,7 @@ class main
 					$this->template->assign_block_vars('filter_type', array(
 								'DESC' => $desc,
 								'S_SELECTED' => ($filter_type == (string) $type) ? true : false,
-								'U_SORT' => append_sid($this->helper->route('eq_dkp_controller', array('name' => 'dkpdetail')), $u_filter_type_params . 'filter_type=' . $type),
+								'U_SORT' => append_sid($this->helper->route('eqdkp_controller', array('name' => 'dkpdetail')), $u_filter_type_params . 'filter_type=' . $type),
 								));
 				}
 
@@ -487,16 +487,16 @@ class main
 						$block_vars['REND'] = gen_util::formatTime($dkp_entry['data']['end']);
 						$block_vars['RTICKS'] = $dkp_entry['data']['raid_ticks'];
 						$block_vars['CTICKS'] = $dkp_entry['data']['ticks'] ? $dkp_entry['data']['ticks'] : 0;
-						$block_vars['U_VIEW_EVENT'] = $this->helper->route('eq_dkp_controller', array('name' => 'viewraid', 'raidid' => (int) $dkp_entry['data']['raid_id']));
-						$block_vars['U_EDIT_EVENT'] = $this->helper->route('eq_dkp_controller', array('name' => 'addraid', 'raidid' => (int) $dkp_entry['data']['raid_id']));
+						$block_vars['U_VIEW_EVENT'] = $this->helper->route('eqdkp_controller', array('name' => 'viewraid', 'raidid' => (int) $dkp_entry['data']['raid_id']));
+						$block_vars['U_EDIT_EVENT'] = $this->helper->route('eqdkp_controller', array('name' => 'addraid', 'raidid' => (int) $dkp_entry['data']['raid_id']));
 						$block_vars['S_EDIT_EVENT'] = 'Edit Raid';
 
 					} elseif ($dkp_entry['type'] == 'Loot Award') {
 						$block_vars['CHAR_NAME'] = $dkp_entry['data']['char_name'];
 						$block_vars['LUCY_ID'] = $dkp_entry['data']['lucy_id'];
 						$block_vars['ITEMNAME'] = $dkp_entry['data']['itemname'];
-						$block_vars['U_ITEMINFO'] = $this->helper->route('eq_dkp_controller', array('name' => 'viewitem', 'lucyid' => $dkp_entry['data']['lucy_id']));
-						$block_vars['U_EDIT_EVENT'] = $this->helper->route('eq_dkp_controller', array('name' => 'addraid', 'raidid' => (int) $dkp_entry['data']['raid_id']));
+						$block_vars['U_ITEMINFO'] = $this->helper->route('eqdkp_controller', array('name' => 'viewitem', 'lucyid' => $dkp_entry['data']['lucy_id']));
+						$block_vars['U_EDIT_EVENT'] = $this->helper->route('eqdkp_controller', array('name' => 'addraid', 'raidid' => (int) $dkp_entry['data']['raid_id']));
 						$block_vars['S_EDIT_EVENT'] = 'Edit Raid';
 						$block_vars['S_DEL_EVENT'] = 'Delete Item Award';
 						$block_vars['DELETABLE'] = 1;
@@ -527,7 +527,7 @@ class main
 							));
 
 			} elseif ($name == 'raidlist') {
-				$page_title = $this->user->lang['EQ_DKP_RAID_LIST'];
+				$page_title = $this->user->lang['EQDKP_RAID_LIST'];
 
 				$default_key = 'a';
 
@@ -552,7 +552,7 @@ class main
 
 				// count the raids (only completed)
 				$sql = 'SELECT COUNT(raid_id) AS total_raids
-					FROM phpbb_eq_dkp_raid
+					FROM phpbb_eqdkp_raid
 					WHERE end > -1';
 				$result = $this->db->sql_query($sql);
 				$total_raids = (int) $this->db->sql_fetchfield('total_raids');
@@ -578,8 +578,8 @@ class main
 					}
 				}
 
-				$pagination_url = append_sid($this->helper->route('eq_dkp_controller', array('name' => 'raidlist')), implode('&amp;', $params));
-				$sort_url = append_sid($this->helper->route('eq_dkp_controller', array('name' => 'raidlist')), implode('&amp;', $sort_params));
+				$pagination_url = append_sid($this->helper->route('eqdkp_controller', array('name' => 'raidlist')), implode('&amp;', $params));
+				$sort_url = append_sid($this->helper->route('eqdkp_controller', array('name' => 'raidlist')), implode('&amp;', $sort_params));
 				$start = $pagination->validate_start($start, 100, $total_raids);
 
 				unset($sort_params);
@@ -593,7 +593,7 @@ class main
 					r.double_dkp,
 					m.members,
 					l.items
-					FROM phpbb_eq_dkp_raid r
+					FROM phpbb_eqdkp_raid r
 					LEFT OUTER JOIN (
 							SELECT raid_id, count(*) as members
 							FROM ' . $this->attendance_table . '
@@ -612,15 +612,15 @@ class main
 	      $this->db->sql_freeresult($result);
 
 				foreach ($rows as $raid_entry) {
-					$ppt = $this->config['eq_dkp_main_dkp_per_tick'];
+					$ppt = $this->config['eqdkp_main_dkp_per_tick'];
 					if ($raid_entry['double_dkp'])
 						$ppt += $ppt;
 
 					$this->template->assign_block_vars('raidrow', array(
 								'DATE' => date('Y-m-d', $raid_entry['day']),
-								'U_VIEW_RAID' => $this->helper->route('eq_dkp_controller', array('name' => 'viewraid', 'raidid' => (int) $raid_entry['raid_id'])),
-								'U_EDIT_RAID' => $this->helper->route('eq_dkp_controller', array('name' => 'addraid', 'raidid' => (int) $raid_entry['raid_id'])),
-								'U_DEL_RAID' => $this->helper->route('eq_dkp_controller', array('name' => 'delraid', 'raidid' => (int) $raid_entry['raid_id'])),
+								'U_VIEW_RAID' => $this->helper->route('eqdkp_controller', array('name' => 'viewraid', 'raidid' => (int) $raid_entry['raid_id'])),
+								'U_EDIT_RAID' => $this->helper->route('eqdkp_controller', array('name' => 'addraid', 'raidid' => (int) $raid_entry['raid_id'])),
+								'U_DEL_RAID' => $this->helper->route('eqdkp_controller', array('name' => 'delraid', 'raidid' => (int) $raid_entry['raid_id'])),
 								'DESC' => $raid_entry['description'],
 								'TICKS' => $raid_entry['raid_ticks'],
 								'DKP' => gen_util::calcDKP($ppt, array($raid_entry['start'], $raid_entry['end']), $raid_entry['start'], 0, $raid_entry['end']),
@@ -643,7 +643,7 @@ class main
 							));
 				$template_name = 'roster_raidlist.html';
 			} elseif ($name == 'roster') {
-				$page_title = $this->user->lang['EQ_DKP_ROSTER_TITLE'];
+				$page_title = $this->user->lang['EQDKP_ROSTER_TITLE'];
 
 				$default_key = 'a';
 				/**
@@ -717,8 +717,8 @@ class main
 					$sort_params[] = "filter_class=$filter_class";
 				}
 
-				$pagination_url = append_sid($this->helper->route('eq_dkp_controller', array('name' => 'roster')), implode('&amp;', $params));
-				$sort_url = append_sid($this->helper->route('eq_dkp_controller', array('name' => 'roster')), implode('&amp;', $sort_params));
+				$pagination_url = append_sid($this->helper->route('eqdkp_controller', array('name' => 'roster')), implode('&amp;', $params));
+				$sort_url = append_sid($this->helper->route('eqdkp_controller', array('name' => 'roster')), implode('&amp;', $sort_params));
 				$start = $pagination->validate_start($start, 100, $total_members);
 
 				unset($sort_params);
@@ -740,7 +740,7 @@ class main
 					$this->template->assign_block_vars('filter_class', array(
 								'DESC' => $desc,
 								'S_SELECTED' => ($filter_class == (string) $class) ? true : false,
-								'U_SORT' => append_sid($this->helper->route('eq_dkp_controller', array('name' => 'roster')), $u_filter_class_params . 'filter_class=' . $class),
+								'U_SORT' => append_sid($this->helper->route('eqdkp_controller', array('name' => 'roster')), $u_filter_class_params . 'filter_class=' . $class),
 							));
 				}
 
@@ -875,8 +875,8 @@ class main
 								'RA_60DESC' => sprintf("%d/%d%s", $all_perc[$user_id]['60']['actual'], $all_perc[$user_id]['60']['total'], $sixty_rollover ? " + $sixty_rollover rollover" : ''),
 								'RA_90PERC' => sprintf("%d (%.1f%%)", $all_perc[$user_id]['90']['ticks'], $all_perc[$user_id]['90']['perc'] * 100),
 								'RA_90DESC' => sprintf("%d/%d%s", $all_perc[$user_id]['90']['actual'], $all_perc[$user_id]['90']['total'], $ninety_rollover ? " + $ninety_rollover rollover" : ''),
-								'U_MDKP_DETAIL' => $this->helper->route('eq_dkp_controller', array('name' => 'dkpdetail', 'role' => 0, 'userid' => $user_id)),
-								'U_SDKP_DETAIL' => $this->helper->route('eq_dkp_controller', array('name' => 'dkpdetail', 'role' => 1, 'userid' => $user_id)),
+								'U_MDKP_DETAIL' => $this->helper->route('eqdkp_controller', array('name' => 'dkpdetail', 'role' => 0, 'userid' => $user_id)),
+								'U_SDKP_DETAIL' => $this->helper->route('eqdkp_controller', array('name' => 'dkpdetail', 'role' => 1, 'userid' => $user_id)),
 								));
 				}
 
@@ -901,9 +901,9 @@ class main
 				 * officer only options below
 				 */
 			} elseif ($name == 'adjustment') {
-				$page_title = $this->user->lang['EQ_DKP_ADJUSTMENT_TITLE'];
+				$page_title = $this->user->lang['EQDKP_ADJUSTMENT_TITLE'];
 
-				add_form_key('eq_dkp/adjustment');
+				add_form_key('eqdkp/adjustment');
 				$template_name = 'dkp_adjustment.html';
 			} elseif ($name == 'delraid') {
 				$raid_id = $this->request->variable('raidid', -1);
@@ -916,8 +916,8 @@ class main
 							c.char_name as entered_by,
 							r.entered_on,
 							r.raid_ticks
-						FROM phpbb_eq_dkp_raid as r
-						JOIN phpbb_eq_dkp_characters as c
+						FROM phpbb_eqdkp_raid as r
+						JOIN phpbb_eqdkp_characters as c
 							ON (c.user_id = r.entered_by and c.role = 2)
 						WHERE r.raid_id = ' . (int) $raid_id;
 			    $result = $this->db->sql_query($sql);
@@ -930,7 +930,7 @@ class main
 								date('Y-m-d', $raid_details['entered_on']),
 								$raid_details['raid_ticks']
 								));
-					$sql = 'delete from phpbb_eq_dkp_raid where raid_id = '.(int) $raid_id;
+					$sql = 'delete from phpbb_eqdkp_raid where raid_id = '.(int) $raid_id;
 					$this->db->sql_query($sql);
 					$sql = 'delete from '. $this->attendance_table .' where raid_id = '.(int) $raid_id;
 					$this->db->sql_query($sql);
@@ -952,7 +952,7 @@ class main
 				$result = $this->db->sql_query($sql);
 				$raid_summary = $this->db->sql_fetchrow($result);
 				$this->db->sql_freeresult($result);
-				$page_title = $this->user->lang('EQ_DKP_VIEW_RAID_TITLE', $raid_summary['description'] );
+				$page_title = $this->user->lang('EQDKP_VIEW_RAID_TITLE', $raid_summary['description'] );
 				// get loot
 				$sql = 'SELECT rl.*, li.name, c1.char_name as awarded, c1.role, c2.char_name as main
 					FROM ' . $this->loot_table . ' as rl
@@ -988,7 +988,7 @@ class main
 										'LUCY_ID' => $row['lucy_id'],
 										'NAME' => $row['name'],
 										'AWARDED' => $award_str,
-										'U_VIEW_ITEM' => $this->helper->route('eq_dkp_controller', array('name' => 'viewitem', 'lucyid' => (int) $row['lucy_id'])),
+										'U_VIEW_ITEM' => $this->helper->route('eqdkp_controller', array('name' => 'viewitem', 'lucyid' => (int) $row['lucy_id'])),
 										));
 						}
 					}
@@ -999,9 +999,9 @@ class main
 				$attend_data = array();
 				$sql = 'SELECT u.user_id, c2.char_name main, c.char_name, c.role
 					FROM phpbb_users u
-						JOIN phpbb_eq_dkp_characters c
+						JOIN phpbb_eqdkp_characters c
 							ON (c.user_id = u.user_id and c.role > 0)
-						JOIN phpbb_eq_dkp_characters c2
+						JOIN phpbb_eqdkp_characters c2
 							ON (c2.user_id = u.user_id and c2.role = 2)
 					WHERE u.user_rank between 2 and 5';
 				$result = $this->db->sql_query($sql);
@@ -1019,10 +1019,10 @@ class main
 
 				// get raid attendance (may include characters who are not current members)
 				$sql = 'SELECT a.user_id, c2.char_name main, c.char_name, a.char_role, a.char_times, a.earned_dkp, a.ticks
-					FROM phpbb_eq_dkp_raid_attendance a
-						JOIN phpbb_eq_dkp_characters c
+					FROM phpbb_eqdkp_raid_attendance a
+						JOIN phpbb_eqdkp_characters c
 							ON (c.user_id = a.user_id and c.char_id = a.char_id)
-						JOIN phpbb_eq_dkp_characters c2
+						JOIN phpbb_eqdkp_characters c2
 							ON (c2.user_id = a.user_id and c2.role = 2)
 					WHERE a.raid_id = ' . (int) $raid_id;
 				$result = $this->db->sql_query($sql);
@@ -1112,16 +1112,16 @@ class main
 				$result = $this->db->sql_query($sql);
 				$item_name = $this->db->sql_fetchfield('name');
 				$this->db->sql_freeresult($result);
-				$page_title = $this->user->lang('EQ_DKP_VIEW_ITEM_TITLE', $item_name );
+				$page_title = $this->user->lang('EQDKP_VIEW_ITEM_TITLE', $item_name );
 
 				// get all drop info
 				$sql = 'SELECT r.day, r.description, rl.user_id, c1.char_name as awarded, c1.role, c2.char_name as main, rl.cost, rl.second_pool
-					FROM phpbb_eq_dkp_raid_loot as rl
-						JOIN phpbb_eq_dkp_raid as r
+					FROM phpbb_eqdkp_raid_loot as rl
+						JOIN phpbb_eqdkp_raid as r
 							ON (r.raid_id = rl.raid_id)
-						JOIN phpbb_eq_dkp_characters as c1
+						JOIN phpbb_eqdkp_characters as c1
 							ON (c1.user_id = rl.user_id and c1.char_id = rl.char_id)
-						JOIN phpbb_eq_dkp_characters as c2
+						JOIN phpbb_eqdkp_characters as c2
 							ON (c2.user_id = rl.user_id and c2.role = 2)
 					WHERE rl.lucy_id = '. (int) $lucy_id . '
 					ORDER BY day DESC';
@@ -1148,8 +1148,8 @@ class main
 
 				// get summary stats
 				$sql = 'SELECT c.role, count(*) cnt, avg(rl.cost) avgc, min(rl.cost) minc, max(rl.cost) maxc
-					FROM phpbb_eq_dkp_raid_loot rl
-						JOIN phpbb_eq_dkp_characters c
+					FROM phpbb_eqdkp_raid_loot rl
+						JOIN phpbb_eqdkp_characters c
 							ON (c.user_id = rl.user_id and c.char_id = rl.char_id)
 					WHERE lucy_id = ' . (int) $lucy_id . '
 					GROUP BY c.role WITH ROLLUP';
@@ -1188,7 +1188,7 @@ class main
 				$raid_id = $this->request->variable('raidid', -1);
 				$raid_desc = '';
 				$raid_date = '';
-				$seconds_checked = $this->config['eq_dkp_seconds_earn_dkp'] ? 1 : 0;
+				$seconds_checked = $this->config['eqdkp_seconds_earn_dkp'] ? 1 : 0;
 				$double_dkp = 0;
 				$merge_dump = 0;
 				$button_label = 'Add Raid';
@@ -1254,22 +1254,22 @@ class main
 				}
 				// form submission handler
 				if ($this->request->is_set_post('addraid')) {
-					if (!check_form_key('eq_dkp/addraid')) {
+					if (!check_form_key('eqdkp/addraid')) {
 						trigger_error($this->user->lang['FORM_INVALID']);
 					}
 
 					$button_label = 'Submit Changes';
-					$raid_desc = $this->request->variable('eq_dkp_raiddescription', $raid_desc);
+					$raid_desc = $this->request->variable('eqdkp_raiddescription', $raid_desc);
 					if (!$raid_desc) {
 						trigger_error('Raid description must be set!');
 					}
 
-					$raid_date = $this->request->variable('eq_dkp_raiddate', $raid_date);
-					$raid_start = $this->request->variable('eq_dkp_raidstart', $raid_start);
-					$raid_end = $this->request->variable('eq_dkp_raidend', $raid_end);
-					$seconds_checked = $this->request->variable('eq_dkp_seconds_earn', $seconds_checked);
-					$double_dkp = $this->request->variable('eq_dkp_double', $double_dkp);
-					$merge_dump = $this->request->variable('eq_dkp_merge_dump', $merge_dump);
+					$raid_date = $this->request->variable('eqdkp_raiddate', $raid_date);
+					$raid_start = $this->request->variable('eqdkp_raidstart', $raid_start);
+					$raid_end = $this->request->variable('eqdkp_raidend', $raid_end);
+					$seconds_checked = $this->request->variable('eqdkp_seconds_earn', $seconds_checked);
+					$double_dkp = $this->request->variable('eqdkp_double', $double_dkp);
+					$merge_dump = $this->request->variable('eqdkp_merge_dump', $merge_dump);
 					$fileinfo = $this->request->file('raiddump');
 					$dump_present = 0;
 					$user_in_dump = array(1 => array(), 2 => array());
@@ -1315,9 +1315,9 @@ class main
 					// based on weekend / weekday
 					if ($raid_start < 0) {
 						if (date('N', strtotime($raid_date)) >= 6) {
-							$raid_start = $this->config['eq_dkp_weekend_start'];
+							$raid_start = $this->config['eqdkp_weekend_start'];
 						} else {
-							$raid_start = $this->config['eq_dkp_weekday_start'];
+							$raid_start = $this->config['eqdkp_weekday_start'];
 						}
 					}
 
@@ -1428,7 +1428,7 @@ class main
 										);
 								if ($raid_end > -1) {
 									if ($role == 2 || ($role == 1 && $seconds_checked == 1)) {
-										$ppt = $role == 2 ? $this->config['eq_dkp_main_dkp_per_tick'] : $this->config['eq_dkp_second_dkp_per_tick'];
+										$ppt = $role == 2 ? $this->config['eqdkp_main_dkp_per_tick'] : $this->config['eqdkp_second_dkp_per_tick'];
 										if ($double_dkp) {
 											$ppt += $ppt;
 										}
@@ -1455,12 +1455,12 @@ class main
 					}
 				}
 				if ($raid_id > -1) {
-					$page_title = $this->user->lang['EQ_DKP_EDIT_RAID_TITLE'];
+					$page_title = $this->user->lang['EQDKP_EDIT_RAID_TITLE'];
 				} else {
-					$page_title = $this->user->lang['EQ_DKP_ADD_RAID_TITLE'];
+					$page_title = $this->user->lang['EQDKP_ADD_RAID_TITLE'];
 				}
 
-				add_form_key('eq_dkp/addraid');
+				add_form_key('eqdkp/addraid');
 
 				$midpoint = ceil(count($charlist[2])/2);
 				$chardata['main'] = array_chunk($charlist[2], $midpoint, true);
@@ -1511,7 +1511,7 @@ class main
 
 			if ($is_officer) {
 				// check if there is an active raid
-				$sql = 'select raid_id from phpbb_eq_dkp_raid where end < 0';
+				$sql = 'select raid_id from phpbb_eqdkp_raid where end < 0';
 				$this->db->sql_query($sql);
 				$active_id = $this->db->sql_fetchfield('raid_id');
 				$add_raid_rt = array('name' => 'addraid');
@@ -1521,9 +1521,9 @@ class main
 
 				$this->template->assign_vars(array(
 							'S_SHOW_OFFICER_OPTIONS' => 1,
-							'U_ADD_RAID' => $this->helper->route('eq_dkp_controller', $add_raid_rt),
+							'U_ADD_RAID' => $this->helper->route('eqdkp_controller', $add_raid_rt),
 							'ADD_RAID_LABEL' => $active_id ? $this->user->lang['OFFICER_EDIT_ACTIVE'] : $this->user->lang['OFFICER_ADD_RAID'],
-							'U_ADJUSTMENTS' => $this->helper->route('eq_dkp_controller', array('name' => 'adjustment')),
+							'U_ADJUSTMENTS' => $this->helper->route('eqdkp_controller', array('name' => 'adjustment')),
 							));
 			}
 			return $this->helper->render($template_name, $page_title);

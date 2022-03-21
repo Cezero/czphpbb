@@ -1,20 +1,20 @@
 services:
-    eq_dkp.util.characterlist:
-        class: eq_dkp\util\characterlist
+    eqdkp.util.characterlist:
+        class: eqdkp\util\characterlist
         arguments:
             - '@dbal.conn'
             - '@user'
             - '%core.table_prefix%'
 
-    eq_dkp.util.dkp_util:
-        class: eq_dkp\util\dkp_util
+    eqdkp.util.dkp_util:
+        class: eqdkp\util\dkp_util
         arguments:
             - '@config'
             - '@dbal.conn'
             - '@user'
 
-    eq_dkp.controller:
-        class: eq_dkp\controller\main
+    eqdkp.controller:
+        class: eqdkp\controller\main
         arguments:
             - '@config'
             - '@dbal.conn'
@@ -25,8 +25,8 @@ services:
             - '@user'
             - '%core.table_prefix%'
 
-    eq_dkp.listener.main:
-        class: eq_dkp\event\main_listener
+    eqdkp.listener.main:
+        class: eqdkp\event\main_listener
         arguments:
             - '@controller.helper'
             - '@template'
@@ -35,19 +35,19 @@ services:
         tags:
             - { name: event.listener }
 
-    eq_dkp.listener.profile:
-        class: eq_dkp\event\profile_listener
+    eqdkp.listener.profile:
+        class: eqdkp\event\profile_listener
         arguments:
             - '@controller.helper'
             - '@template'
             - '@user'
-            - '@eq_dkp.util.characterlist'
+            - '@eqdkp.util.characterlist'
             - '%core.php_ext%'
         tags:
             - { name: event.listener }
 
-    eq_dkp.cron.task.dkp:
-        class: eq_dkp\cron\task\dkp_decay
+    eqdkp.cron.task.dkp:
+        class: eqdkp\cron\task\dkp_decay
         arguments:
             - '@config'
             - '@dbal.conn'
@@ -57,8 +57,8 @@ services:
         tags:
             - { name: cron.task }
 
-    eq_dkp.notification.type.dkp:
-        class: eq_dkp\notification\type\dkp
+    eqdkp.notification.type.dkp:
+        class: eqdkp\notification\type\dkp
         scope: prototype # scope MUST be prototype for this to work!
         arguments:
             - '@user_loader'

@@ -8,13 +8,13 @@
  *
  */
 
-namespace eq_dkp\migrations;
+namespace eqdkp\migrations;
 
 class install_acp_module extends \phpbb\db\migration\migration
 {
 	public function effectively_installed()
 	{
-		return isset($this->config['eq_dkp_goodbye']);
+		return isset($this->config['eqdkp_goodbye']);
 	}
 
 	static public function depends_on()
@@ -25,7 +25,7 @@ class install_acp_module extends \phpbb\db\migration\migration
 	public function update_data()
 	{
 		return array(
-			array('config.add', array('eq_dkp_goodbye', 0)),
+			array('config.add', array('eqdkp_goodbye', 0)),
 
 			array('module.add', array(
 				'acp',
@@ -36,7 +36,7 @@ class install_acp_module extends \phpbb\db\migration\migration
 				'acp',
 				'ACP_DKP_TITLE',
 				array(
-					'module_basename'	=> '\eq_dkp\acp\main_module',
+					'module_basename'	=> '\eqdkp\acp\main_module',
 					'modes'			=> array('settings'),
 				),
 			)),

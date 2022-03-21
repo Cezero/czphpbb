@@ -8,7 +8,7 @@
  *
  */
 
-namespace eq_dkp\migrations;
+namespace eqdkp\migrations;
 
 class install_ucp_module extends \phpbb\db\migration\migration
 {
@@ -27,7 +27,7 @@ class install_ucp_module extends \phpbb\db\migration\migration
 
 	static public function depends_on()
 	{
-		return array('\eq_dkp\migrations\install_user_schema');
+		return array('\eqdkp\migrations\install_user_schema');
 	}
 
 	public function update_data()
@@ -42,7 +42,7 @@ class install_ucp_module extends \phpbb\db\migration\migration
 				'ucp',
 				'UCP_DKP_TITLE',
 				array(
-					'module_basename'	=> '\eq_dkp\ucp\main_module',
+					'module_basename'	=> '\eqdkp\ucp\main_module',
 					'modes'				=> array('settings'),
 				),
 			)),

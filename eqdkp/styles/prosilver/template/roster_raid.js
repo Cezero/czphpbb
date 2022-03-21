@@ -33,7 +33,7 @@ function makeTimeButton(id, role, offset, text) {
 
 function makeItemButton(id) {
 	var ib = $('<img>', {
-		src: '/ext/eq_dkp/styles/prosilver/template/images/dagger.png',
+		src: '/ext/eqdkp/styles/prosilver/template/images/dagger.png',
 		id: 'ib_'+id,
 		title: 'Award Item',
 		"class": 'text-button',
@@ -76,7 +76,7 @@ function parseAttend() {
 	var userID = row.attr('data-userid');
 	var role = row.attr('data-role');
 	var displayElement = $('#ad_'+role+'_'+userID);
-	var raidEnd = Number($('#eq_dkp_raidend').val());
+	var raidEnd = Number($('#eqdkp_raidend').val());
 	var time_str = $( '#ut_'+role+'_'+userID ).val();
 	displayElement.empty(); // clear it out
 	$.eqDKP.editing = 0; // we're no longer editing anyone
@@ -467,7 +467,7 @@ function editTime() {
 	var role = row.attr('data-role');
 	var attendDispElmnt = $('#ad_'+role+'_'+id);
 	var offset = $( this ).attr('data-offset');
-	var raidStart = Number($('#eq_dkp_raidstart').val());
+	var raidStart = Number($('#eqdkp_raidstart').val());
 	var time_str = $('#ut_'+role+'_'+id).val();
 
 	$( this ).empty();
@@ -504,11 +504,11 @@ function editTime() {
 }
 
 function parseAllNames() {
-	$( ".eq_dkp_name_display" ).each(parseName);
+	$( ".eqdkp_name_display" ).each(parseName);
 }
 
 function parseAllAttend() {
-	$( ".eq_dkp_attend_display" ).each(parseAttend);
+	$( ".eqdkp_attend_display" ).each(parseAttend);
 }
 
 function itemDeleteClicked( event ) {
@@ -577,16 +577,16 @@ function attendanceEntryClicked( event ) {
 }
 
 function setRaidEndOpts () {
-	var raidStart = Number($('#eq_dkp_raidstart').val());
-	var raidEnd = Number($('#eq_dkp_raidend').val());
+	var raidStart = Number($('#eqdkp_raidstart').val());
+	var raidEnd = Number($('#eqdkp_raidend').val());
 	if (raidEnd < raidStart || raidEnd < 0) {
-		$('#eq_dkp_raidend').empty().append(getTimeOptionList(raidStart));
-		$('#eq_dkp_raidend').selectmenu('refresh');
+		$('#eqdkp_raidend').empty().append(getTimeOptionList(raidStart));
+		$('#eqdkp_raidend').selectmenu('refresh');
 	}
 }
 
 function dateChangeFn () {
-	var date_str = $('#eq_dkp_raiddate').val();
+	var date_str = $('#eqdkp_raiddate').val();
 	if (date_str) {
 		var defTime = eqDKPweekdaystart;
 		var raidDate = new Date(date_str);
@@ -594,9 +594,9 @@ function dateChangeFn () {
 			// weekend
 			defTime = eqDKPweekendstart;
 		}
-		if ($('#eq_dkp_raidstart').val() < 0) {
-			$('#eq_dkp_raidstart').empty().append(getTimeOptionList(-1,defTime));
-			$('#eq_dkp_raidstart').selectmenu('refresh');
+		if ($('#eqdkp_raidstart').val() < 0) {
+			$('#eqdkp_raidstart').empty().append(getTimeOptionList(-1,defTime));
+			$('#eqdkp_raidstart').selectmenu('refresh');
 		}
 		setRaidEndOpts();
 	}
@@ -607,15 +607,15 @@ function readyFn( jQuery ) {
 	getItemData();
 
 	// setup UI elements
-	$('#eq_dkp_raiddate').datepicker({
+	$('#eqdkp_raiddate').datepicker({
 			maxDate: 0
 			});
-	$('#eq_dkp_raiddate').on('change', dateChangeFn );
-	$('#eq_dkp_raidstart').selectmenu({
+	$('#eqdkp_raiddate').on('change', dateChangeFn );
+	$('#eqdkp_raidstart').selectmenu({
 			open: selectedToTop
 			});
-	$('#eq_dkp_raidstart').on('change', setRaidEndOpts );
-	$('#eq_dkp_raidend').selectmenu({
+	$('#eqdkp_raidstart').on('change', setRaidEndOpts );
+	$('#eqdkp_raidend').selectmenu({
 			open: selectedToTop
 			});
 

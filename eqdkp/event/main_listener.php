@@ -67,7 +67,7 @@ class main_listener implements EventSubscriberInterface
 	{
 		$lang_set_ext = $event['lang_set_ext'];
 		$lang_set_ext[] = array(
-			'ext_name' => 'eq_dkp',
+			'ext_name' => 'eqdkp',
 			'lang_set' => 'common',
 		);
 		$event['lang_set_ext'] = $lang_set_ext;
@@ -79,7 +79,7 @@ class main_listener implements EventSubscriberInterface
 	public function add_page_header_link()
 	{
 		$this->template->assign_vars(array(
-			'U_DKP_PAGE'	=> $this->helper->route('eq_dkp_controller', array('name' => 'roster')),
+			'U_DKP_PAGE'	=> $this->helper->route('eqdkp_controller', array('name' => 'roster')),
 		));
 	}
 
@@ -92,8 +92,8 @@ class main_listener implements EventSubscriberInterface
 	{
 		if ($event['on_page'][1] === 'app' && strrpos($event['row']['session_page'], 'app.' . $this->php_ext . '/dkp') === 0)
 		{
-			$event['location'] = $this->user->lang('VIEWING_EQ_DKP');
-			$event['location_url'] = $this->helper->route('eq_dkp_controller', array('name' => 'world'));
+			$event['location'] = $this->user->lang('VIEWING_EQDKP');
+			$event['location_url'] = $this->helper->route('eqdkp_controller', array('name' => 'world'));
 		}
 	}
 

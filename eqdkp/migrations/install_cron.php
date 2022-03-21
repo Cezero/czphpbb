@@ -8,13 +8,13 @@
  *
  */
 
-namespace eq_dkp\migrations;
+namespace eqdkp\migrations;
 
 class install_cron extends \phpbb\db\migration\migration
 {
 	public function effectively_installed()
 	{
-		return isset($this->config['eq_dkp_cron_last_run']);
+		return isset($this->config['eqdkp_cron_last_run']);
 	}
 
 	static public function depends_on()
@@ -25,7 +25,7 @@ class install_cron extends \phpbb\db\migration\migration
 	public function update_data()
 	{
 		return array(
-			array('config.add', array('eq_dkp_cron_last_run', 0)),
+			array('config.add', array('eqdkp_cron_last_run', 0)),
 		);
 	}
 }

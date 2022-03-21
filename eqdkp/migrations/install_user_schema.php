@@ -8,13 +8,13 @@
  *
  */
 
-namespace eq_dkp\migrations;
+namespace eqdkp\migrations;
 
 class install_user_schema extends \phpbb\db\migration\migration
 {
 	public function effectively_installed()
 	{
-	//	return $this->db_tools->sql_column_exists($this->table_prefix . 'users', 'user_eq_dkp');
+	//	return $this->db_tools->sql_column_exists($this->table_prefix . 'users', 'user_eqdkp');
 	// TODO add functions to check for tables to exist
 	}
 
@@ -28,7 +28,7 @@ class install_user_schema extends \phpbb\db\migration\migration
 		return array(
 			'add_tables'		=> array(
 				// user character table
-				$this->table_prefix . 'eq_dkp_characters'	=> array(
+				$this->table_prefix . 'eqdkp_characters'	=> array(
 					'COLUMNS'		=> array(
 						'char_id'			=> array('UINT', null, 'auto_increment'),
 						'user_id'			=> array('UINT', null),
@@ -41,12 +41,12 @@ class install_user_schema extends \phpbb\db\migration\migration
 			),
 			'add_columns' => array(
 				$this->table_prefix . 'users' => array(
-					'eq_dkp_start_date' => array('TIMESTAMP'),
-					'eq_dkp_current_dkp' => array('UINT', 0),
-					'eq_dkp_tick_cnt' => array('UINT', 0),
-					'eq_dkp_ninety_cnt' => array('UINT', 0),
-					'eq_dkp_sixty_cnt' => array('UINT', 0),
-					'eq_dkp_thirty_cnt' => array('UINT', 0),
+					'eqdkp_start_date' => array('TIMESTAMP'),
+					'eqdkp_current_dkp' => array('UINT', 0),
+					'eqdkp_tick_cnt' => array('UINT', 0),
+					'eqdkp_ninety_cnt' => array('UINT', 0),
+					'eqdkp_sixty_cnt' => array('UINT', 0),
+					'eqdkp_thirty_cnt' => array('UINT', 0),
 				),
 			),
 		);
@@ -57,16 +57,16 @@ class install_user_schema extends \phpbb\db\migration\migration
 		return array(
 			'drop_columns' => array(
 				$this->table_prefix . 'users' => array(
-					'eq_dkp_start_date',
-					'eq_dkp_current_dkp',
-					'eq_dkp_tick_cnt',
-					'eq_dkp_ninety_cnt',
-					'eq_dkp_sixty_cnt',
-					'eq_dkp_thirty_cnt',
+					'eqdkp_start_date',
+					'eqdkp_current_dkp',
+					'eqdkp_tick_cnt',
+					'eqdkp_ninety_cnt',
+					'eqdkp_sixty_cnt',
+					'eqdkp_thirty_cnt',
 				),
 			),
 			'drop_tables'		=> array(
-				$this->table_prefix . 'eq_dkp_characters',
+				$this->table_prefix . 'eqdkp_characters',
 			),
 		);
 	}

@@ -1,5 +1,5 @@
 {
-    "name": "phpbb_eq_dkp/eq_dkp",
+    "name": "czphpbb/eqdkp",
     "type": "phpbb-extension",
     "description": "Custom extension for integrating DKP into a guild forum",
     "version": "1.0.0-dev",

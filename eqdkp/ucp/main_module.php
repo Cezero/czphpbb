@@ -8,9 +8,9 @@
  *
  */
 
-namespace eq_dkp\ucp;
+namespace eqdkp\ucp;
 
-use eq_dkp\util\eq_const;
+use eqdkp\util\eq_const;
 
 /**
  * DKPAddon UCP module.
@@ -25,9 +25,9 @@ class main_module
 
 		$this->tpl_name = 'ucp_dkp_body';
 		$this->page_title = $user->lang('UCP_DKP_TITLE');
-		add_form_key('eq_dkp');
+		add_form_key('eqdkp');
 
-		$charlist = $phpbb_container->get('eq_dkp.util.characterlist');
+		$charlist = $phpbb_container->get('eqdkp.util.characterlist');
 
 		$eq_char = $charlist->getCharacterList($user->data['user_id']);
 
@@ -38,13 +38,13 @@ class main_module
 
 		// user is submitting a new character
 		if ($request->is_set_post('newchar')) {
-			if (!check_form_key('eq_dkp')) {
+			if (!check_form_key('eqdkp')) {
 				trigger_error($user->lang('FORM_INVALID'));
 			}
 
-			$char_name = $request->variable('eq_dkp_newcharname', '');
-			$char_class = $request->variable('eq_dkp_newcharclass', 0);
-			$char_role = $request->variable('eq_dkp_newcharrole', 0);
+			$char_name = $request->variable('eqdkp_newcharname', '');
+			$char_class = $request->variable('eqdkp_newcharclass', 0);
+			$char_role = $request->variable('eqdkp_newcharrole', 0);
 
 			if (!$char_name) {
 				trigger_error($user->lang('UCP_NEW_CHAR_NAME_REQUIRED'));
@@ -58,13 +58,13 @@ class main_module
 			$eq_char = $charlist->getCharacterList($user->data['user_id']);
 			// user is submiting modifications to one or more characters
 		} elseif ($request->is_set_post('updchar')) {
-			if (!check_form_key('eq_dkp')) {
+			if (!check_form_key('eqdkp')) {
 				trigger_error($user->lang('FORM_INVALID'));
 			}
 			foreach ($eq_char as $row) {
-				$form_class = $request->variable('eq_dkp_changeclass_'.$row['char_id'], 0);
-				$form_role = $request->variable('eq_dkp_changerole_'.$row['char_id'], 0);
-				$form_del = $request->variable('eq_dkp_delchar_'.$row['char_id'], '');
+				$form_class = $request->variable('eqdkp_changeclass_'.$row['char_id'], 0);
+				$form_role = $request->variable('eqdkp_changerole_'.$row['char_id'], 0);
+				$form_del = $request->variable('eqdkp_delchar_'.$row['char_id'], '');
 				if ($form_del == 'Delete') {
 					$charlist->remCharacter($user->data['user_id'], $row['char_id']);
 				} else {

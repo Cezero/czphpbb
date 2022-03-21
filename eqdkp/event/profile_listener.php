@@ -8,9 +8,9 @@
  *
  */
 
-namespace eq_dkp\event;
+namespace eqdkp\event;
 
-use eq_dkp\util\eq_const;
+use eqdkp\util\eq_const;
 
 /**
  * @ignore
@@ -50,7 +50,7 @@ class profile_listener implements EventSubscriberInterface
 	/* @var \phpbb\user */
 	protected $user;
 
-	/* @var \eq_dkp\util\characterlist */
+	/* @var \eqdkp\util\characterlist */
 	protected $characterlist;
 
 	/** @var string phpEx */
@@ -62,14 +62,14 @@ class profile_listener implements EventSubscriberInterface
 	 * @param \phpbb\controller\helper	$helper		Controller helper object
 	 * @param \phpbb\template\template	$template	Template object
 	 * @param \phpbb\user               $user       User object
-	 * @param \eq_dkp\util\characterlist $characterlist
+	 * @param \eqdkp\util\characterlist $characterlist
 	 * @param string                    $php_ext    phpEx
 	 */
 	public function __construct(
 			\phpbb\controller\helper $helper,
 			\phpbb\template\template $template,
 			\phpbb\user $user,
-			\eq_dkp\util\characterlist $characterlist,
+			\eqdkp\util\characterlist $characterlist,
 			$php_ext
 			)
 	{

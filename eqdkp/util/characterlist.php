@@ -8,7 +8,7 @@
  *
  */
 
-namespace eq_dkp\util;
+namespace eqdkp\util;
 
 /**
 	* Class for retrieving and updating the character list
@@ -36,14 +36,14 @@ class characterlist
 	{
 		$this->db = $db;
 		$this->user = $user;
-		$this->table_name = $table_prefix . 'eq_dkp_characters';
+		$this->table_name = $table_prefix . 'eqdkp_characters';
 	}
 
 	public function getCharacterList($user_id)
 	{
 		$sql = 'SELECT c.char_id, c.char_name, c.char_class, c.role as rid, r.role_name as role
 			FROM ' . $this->table_name . ' as c
-			JOIN phpbb_eq_dkp_char_roles as r
+			JOIN phpbb_eqdkp_char_roles as r
 			ON (r.role_id = c.role)
 			WHERE c.deleted = false
 			and c.user_id = ' . (int) $user_id;
@@ -154,7 +154,7 @@ class characterlist
 		{
 			// determine if this character has ever been awarded loot
 			$sql = 'SELECT count(*) as items
-				FROM phpbb_eq_dkp_raid_loot
+				FROM phpbb_eqdkp_raid_loot
 				WHERE user_id = ' . (int) $user_id . '
 				and char_id = ' . (int) $char_id;
 			$this->db->sql_query($sql);

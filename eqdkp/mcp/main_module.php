@@ -8,7 +8,7 @@
  *
  */
 
-namespace eq_dkp\mcp;
+namespace eqdkp\mcp;
 
 /**
  * DKPAddon MCP module.
@@ -23,7 +23,7 @@ class main_module
 
 		$this->tpl_name = 'mcp_dkp_body';
 		$this->page_title = $user->lang('MCP_DKP_TITLE');
-		add_form_key('eq_dkp');
+		add_form_key('eqdkp');
 
 		$template->assign_var('U_POST_ACTION', $this->u_action);
 	}
