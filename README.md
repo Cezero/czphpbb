@@ -2,9 +2,9 @@
 
 ## Installation
 
-Copy the extension to phpBB/ext/eq_dkp
+Copy the extension to phpBB/ext/cz/eq_dkp
 
-Go to "ACP" > "Customise" > "Extensions" and enable the "DKPAddon" extension.
+Go to "ACP" > "Customise" > "Extensions" and enable the "EQ DKP" extension.
 
 ## License
 
