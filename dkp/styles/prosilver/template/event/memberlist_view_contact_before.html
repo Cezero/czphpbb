@@ -1,0 +1,27 @@
+<!-- INCLUDECSS ../theme/custom.css -->
+<div class="panel bg1">
+	<div class="inner">
+	<!-- IF S_DKP_NOCHARS -->
+	No characters associated with this account.
+	<!-- ELSE -->
+	<div class="forumbg forumbg-table">
+		<div class="inner">
+			<table class="table2">
+				<thead>
+					<tr><th class="name">{L_CHAR_NAME}</th><th class="name">{L_CHAR_CLASS}</th><th class="name">{L_CHAR_ROLE}</th></tr>
+				</thead>
+				<tbody>
+					<!-- BEGIN charlist -->
+					<tr class="<!-- IF charlist.S_ROW_COUNT is even -->bg1<!-- ELSE -->bg2<!-- ENDIF -->">
+						<td class="username">{charlist.NAME}</td>
+						<td class="info">{charlist.CLASS}</td>
+						<td class="info">{charlist.ROLE}</td>
+					</tr>
+					<!-- END charlist -->
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<!-- ENDIF -->
+	</div>
+</div>

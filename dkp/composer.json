@@ -1,0 +1,24 @@
+{
+    "name": "czphpbb/dkp",
+    "type": "phpbb-extension",
+    "description": "Custom extension for integrating DKP into a guild forum",
+    "version": "1.1.0",
+    "license": "GPL-2.0",
+    "authors": [
+        {
+            "name": "Steven Kordik",
+            "email": "countzero@cyberdeck.org",
+            "homepage": "https://github.com/Cezero/czphpbb"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.3",
+        "composer/installers": "~1.0"
+    },
+    "extra": {
+        "display-name": "DKPAddon",
+        "soft-require": {
+            "phpbb/phpbb": ">=3.1.4"
+        }
+    }
+}

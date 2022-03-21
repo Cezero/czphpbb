@@ -1,0 +1,3 @@
+czphpbb_dkp_controller:
+    path: /dkp/{name}
+    defaults: { _controller: czphpbb.dkp.controller:handle }
