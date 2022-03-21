@@ -1,3 +1,0 @@
-eqdkp_controller:
-    path: /dkp/{name}
-    defaults: { _controller: eqdkp.controller:handle }
