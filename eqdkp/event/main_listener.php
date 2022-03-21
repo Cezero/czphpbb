@@ -8,7 +8,7 @@
  *
  */
 
-namespace eq_dkp\event;
+namespace eqdkp\event;
 
 /**
  * @ignore
