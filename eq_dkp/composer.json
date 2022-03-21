@@ -1,5 +1,5 @@
 {
-    "name": "cz/eq_dkp",
+    "name": "phpbb_eq_dkp/eq_dkp",
     "type": "phpbb-extension",
     "description": "Custom extension for integrating DKP into a guild forum",
     "version": "1.0.0-dev",
@@ -17,7 +17,7 @@
         "composer/installers": "~1.0"
     },
     "extra": {
-        "display-name": "DKPAddon",
+        "display-name": "EQ DKP",
         "soft-require": {
             "phpbb/phpbb": ">=3.1.4"
         }
