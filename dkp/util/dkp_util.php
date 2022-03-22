@@ -111,7 +111,7 @@ class dkp_util
 				r.rend > -1 AND
 				r.day >= '. (int) $start_date;
 		if ($role != 0) {
-			$sql .= ' AND r.seconds_earn = 1';
+			$sql .= ' AND r.seconds_earn = true';
 		}
 		$result = $this->db->sql_query($sql);
 		$r_attend = $this->db->sql_fetchrowset($result);
@@ -228,9 +228,9 @@ class dkp_util
 			$row = $this->db->sql_fetchrow($result);
 			$this->db->sql_freeresult($result);
 			if (isset($row['char_times'])) {
-				if ($role != 2 || $row['seconds_earn'] == 1) {
+				if ($role != 2 || $row['seconds_earn']) {
 					$ppt = $role == 2 ? $this->config['czphpbb_dkp_second_dkp_per_tick'] : $this->config['czphpbb_dkp_main_dkp_per_tick'];
-					if ($row['double_dkp'] == 1) {
+					if ($row['double_dkp']) {
 						$ppt += $ppt;
 					}
 					$earned += gen_util::calcDKP($ppt, explode(',', $row['char_times']), $row['rstart'], 1);
@@ -313,9 +313,9 @@ class dkp_util
 			$rows = $this->db->sql_fetchrowset($result);
 			$this->db->sql_freeresult($result);
 			foreach ($rows as $row) {
-				if ($row['seconds_earn'] !=0 || $row['char_role'] == 2) {
+				if (!$row['seconds_earn'] || $row['char_role'] == 2) {
 					$ppt = ($row['char_role'] == 2 ? $this->config['czphpbb_dkp_main_dkp_per_tick'] : $this->config['czphpbb_dkp_second_dkp_per_tick']);
-					if ($row['double_dkp'] == 1) {
+					if ($row['double_dkp']) {
 						$ppt += $ppt;
 					}
 					$all_dkp[$row['user_id']][$row['char_role'] == 2 ? 0 : 1] += gen_util::calcDKP($ppt, explode(',', $row['char_times']), $row['rstart'], 1);
