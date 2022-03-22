@@ -137,7 +137,7 @@ class dkp_util
 			WHERE
 				r.day >= ' . (int) $start_date . ' AND
 				l.user_id = ' . (int) $user_id . ' AND
-				l.second_pool = ' . $second_pool;
+				l.second_pool = ' . ($second_pool ? 'true' : 'false');
 		$result = $this->db->sql_query($sql);
 		$r_loot = $this->db->sql_fetchrowset($result);
 		$this->db->sql_freeresult($result);
@@ -152,7 +152,7 @@ class dkp_util
 			WHERE
 				a.entered_on >= ' . (int) $start_date . ' AND
 				a.user_id = ' . (int) $user_id . ' AND
-				a.second_pool = ' . $second_pool;
+				a.second_pool = ' . ($second_pool ? 'true' : 'false');
 		$result = $this->db->sql_query($sql);
 		$r_adj = $this->db->sql_fetchrowset($result);
 		$this->db->sql_freeresult($result);
