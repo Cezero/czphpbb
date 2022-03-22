@@ -132,7 +132,7 @@ class dkp_util
 				ON (r.raid_id = l.raid_id)
 			JOIN phpbb_czphpbb_dkp_characters c
 				ON (c.char_id = l.char_id)
-			JOIN lucy_itemlist lu
+			JOIN phpbb_czphpbb_lucy_itemlist lu
 				ON (lu.id = l.lucy_id)
 			WHERE
 				r.day >= ' . (int) $start_date . ' AND
