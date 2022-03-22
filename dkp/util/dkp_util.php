@@ -352,13 +352,14 @@ class dkp_util
 			CASE
 				WHEN c.czphpbb_dkp_start_date IS NOT NULL
 				THEN c.czphpbb_dkp_start_date
-				ELSE MIN(r.day)
+				ELSE (
+						SELECT MIN(r.day)
+						FROM phpbb_czphpbb_dkp_raid_attendance a
+						LEFT OUTER JOIN phpbb_czphpbb_dkp_raid r
+							ON (r.raid_id = a.raid_id)
+						WHERE a.user_id = c.user_id)
 				END as first
 			FROM phpbb_users c
-			JOIN phpbb_czphpbb_dkp_raid_attendance a
-				ON (a.user_id = c.user_id)
-			JOIN phpbb_czphpbb_dkp_raid r
-				ON (r.raid_id = a.raid_id)
 			WHERE
 				c.user_id = ' . (int) $user_id;
 		$this->db->sql_query($sql);
@@ -381,19 +382,22 @@ class dkp_util
 				);
 		// get all member IDs and first raid date
 		$sql = 'SELECT
-			c.user_id, CASE WHEN c.czphpbb_dkp_start_date IS NOT NULL THEN c.czphpbb_dkp_start_date ELSE min(r.day) END as first
-			FROM (
-				SELECT u.user_id, u.czphpbb_dkp_start_date, c.char_id
-				FROM phpbb_users u
-				JOIN phpbb_czphpbb_dkp_characters c
-					ON (c.user_id = u.user_id and c.role = '. (int) $char_role .' and c.deleted = 0)
-				WHERE u.user_rank between 2 and 5
-				ORDER BY u.user_id) as c
-			LEFT OUTER JOIN phpbb_czphpbb_dkp_raid_attendance a
-				ON (a.user_id = c.user_id and a.char_role = '. (int) $char_role .')
-			LEFT OUTER JOIN phpbb_czphpbb_dkp_raid r
-				ON (r.raid_id = a.raid_id)
-			GROUP BY c.user_id';
+				u.user_id,
+				c.char_id,
+				CASE WHEN u.czphpbb_dkp_start_date IS NOT NULL THEN u.czphpbb_dkp_start_date
+				ELSE ( SELECT MIN(r.day)
+					FROM phpbb_czphpbb_dkp_raid_attendance a			
+					LEFT OUTER JOIN phpbb_czphpbb_dkp_raid r
+						ON (r.raid_id = a.raid_id)
+					WHERE
+						a.user_id = c.user_id AND a.char_role = '. (int) $char_role .' )
+				END as first
+			FROM phpbb_users u
+			JOIN phpbb_czphpbb_dkp_characters c
+				ON (c.user_id = u.user_id AND c.role = '. (int) $char_role .' AND c.deleted = false)
+			WHERE
+				u.user_rank BETWEEN 2 AND 5
+			ORDER BY u.user_id';
 		$result = $this->db->sql_query($sql);
 		$rows = $this->db->sql_fetchrowset($result);
 		$this->db->sql_freeresult($result);

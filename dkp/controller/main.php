@@ -754,7 +754,7 @@ class main
 					c.char_id, c.char_name, c.char_class
 						FROM ' . USERS_TABLE . ' u
 						JOIN ' . $this->char_table . ' c
-						ON (c.user_id = u.user_id and c.role = ' . (int) $char_role . ' and c.deleted = 0)
+						ON (c.user_id = u.user_id and c.role = ' . (int) $char_role . ' and c.deleted = false)
 						WHERE u.user_rank between 2 and 5
 						AND ' . $this->db->sql_in_set('c.char_class', $class_types);
 				$result = $this->db->sql_query($sql);

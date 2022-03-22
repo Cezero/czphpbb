@@ -155,7 +155,7 @@ class install_user_schema extends \phpbb\db\migration\migration
 			],
 			'add_columns' => [
 				$this->table_prefix . 'users' => [
-					'czphpbb_dkp_start_date'	=> ['TIMESTAMP'],
+					'czphpbb_dkp_start_date'	=> ['TIMESTAMP', null],
 					'czphpbb_dkp_current_dkp'	=> ['UINT', 0],
 					'czphpbb_dkp_tick_cnt'		=> ['UINT', 0],
 					'czphpbb_dkp_ninety_cnt'	=> ['UINT', 0],
