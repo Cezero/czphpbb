@@ -1465,7 +1465,11 @@ class main
 				$midpoint = ceil(count($charlist[2])/2);
 				$chardata['main'] = array_chunk($charlist[2], $midpoint, true);
 				$midpoint = ceil(count($charlist[1])/2);
-				$chardata['second'] = array_chunk($charlist[1], $midpoint, true);
+				if (count($charlist[1]) > 0) {
+					$chardata['second'] = array_chunk($charlist[1], $midpoint, true);
+				} else {
+					$chardata['second'] = [];
+				}
 				foreach ($chardata as $type => $rowset) {
 					$role = ($type == 'main' ? 2 : 1);
 					$this->template->assign_block_vars('characters', array(
