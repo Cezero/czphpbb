@@ -57,7 +57,7 @@ class install_user_schema extends \phpbb\db\migration\migration
 
 				$this->table_prefix . 'czphpbb_dkp_char_roles' => [
 					'COLUMNS' => [
-						'role_id' => ['TINT:8', ''],
+						'role_id' => ['TINT:8', 0],
 						'role_name' => ['CHAR:20', ''],
 					],
 				],
