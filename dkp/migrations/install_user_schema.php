@@ -156,11 +156,6 @@ class install_user_schema extends \phpbb\db\migration\migration
 			'add_columns' => [
 				$this->table_prefix . 'users' => [
 					'czphpbb_dkp_start_date'	=> ['TIMESTAMP', null],
-					'czphpbb_dkp_current_dkp'	=> ['UINT', 0],
-					'czphpbb_dkp_tick_cnt'		=> ['UINT', 0],
-					'czphpbb_dkp_ninety_cnt'	=> ['UINT', 0],
-					'czphpbb_dkp_sixty_cnt'		=> ['UINT', 0],
-					'czphpbb_dkp_thirty_cnt'	=> ['UINT', 0],
 				],
 			],
 			];
@@ -172,11 +167,6 @@ class install_user_schema extends \phpbb\db\migration\migration
 			'drop_columns' => [
 				$this->table_prefix . 'users' => [
 					'czphpbb_dkp_start_date',
-					'czphpbb_dkp_current_dkp',
-					'czphpbb_dkp_tick_cnt',
-					'czphpbb_dkp_ninety_cnt',
-					'czphpbb_dkp_sixty_cnt',
-					'czphpbb_dkp_thirty_cnt',
 				],
 			],
 			'drop_tables'		=> [
