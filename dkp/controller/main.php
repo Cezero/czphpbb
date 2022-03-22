@@ -1511,7 +1511,7 @@ class main
 
 			if ($is_officer) {
 				// check if there is an active raid
-				$sql = 'select raid_id from phpbb_czphpbb_dkp_raid where end < 0';
+				$sql = 'select raid_id from phpbb_czphpbb_dkp_raid where rend < 0';
 				$this->db->sql_query($sql);
 				$active_id = $this->db->sql_fetchfield('raid_id');
 				$add_raid_rt = array('name' => 'addraid');
