@@ -142,7 +142,7 @@ class install_user_schema extends \phpbb\db\migration\migration
 
 				$this->table_prefix . 'czphpbb_dkp_rollover' => [
 					'COLUMNS' => [
-						'user_id' => ['UINT', ''],
+						'user_id' => ['UINT', 0],
 						'dkp' => ['UINT', null],
 						'alltime' => ['UINT', null],
 						'ninety' => ['UINT', null],
