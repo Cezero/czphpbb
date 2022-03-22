@@ -108,7 +108,7 @@ class dkp_util
 			LEFT OUTER JOIN phpbb_czphpbb_dkp_characters c
 				ON (c.char_id = a.char_id)
 			WHERE
-				r.end > -1 AND
+				r.rend > -1 AND
 				r.day >= '. (int) $start_date;
 		if ($role != 0) {
 			$sql .= ' AND r.seconds_earn = 1';
