@@ -46,7 +46,7 @@ class install_user_schema extends \phpbb\db\migration\migration
 						'description' => ['VCHAR', ''],
 						'entered_by' => ['UINT', 0],
 						'entered_on' => ['UINT', 0],
-						'second_pool' => ['TINT:8', 0],
+						'second_pool' => ['BOOL', 0],
 						'adj_id' => ['UINT', null, 'auto_increment'],
 					],
 					'PRIMARY_KEY' => 'adj_id',
@@ -98,7 +98,7 @@ class install_user_schema extends \phpbb\db\migration\migration
 						'entered_by' => ['UINT', 0],
 						'entered_on' => ['UINT', 0],
 						'raid_ticks' => ['UINT', 0],
-						'seconds_earn' => ['TINT:8', 0],
+						'seconds_earn' => ['BOOL', 0],
 						'double_dkp' => ['BOOL', 0],
 					],
 					'PRIMARY_KEY' => ['raid_id']
