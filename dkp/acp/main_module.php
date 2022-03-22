@@ -99,7 +99,7 @@ class main_module
 
 			$role_opt = '';
 			$c = 0;
-			foreach (array('Alt', 'Second Main', 'Main') as $role)
+			foreach (array('Box', 'Raid Box', 'Main') as $role)
 				$role_opt .= '<option value="'.$c++.'">'.$role.'</option>';
 
 			// user is submitting a new character
@@ -146,7 +146,7 @@ class main_module
 				foreach ($eq_char as $row) {
 					$char_role_opt = '';
 					$c = 0;
-					foreach (array('Alt', 'Second Main', 'Main') as $role) {
+					foreach (array('Box', 'Raid Box', 'Main') as $role) {
 						$char_role_opt .= '<option value="'.$c.'"'.($c == $row['rid'] ? ' selected' : '').'>'.$role.'</option>';
 						$c++;
 					}

@@ -68,7 +68,7 @@ class install_user_schema extends \phpbb\db\migration\migration
 						'user_id' => ['UINT', 0],
 						'char_name' => ['VCHAR', ''],
 						'char_class' => ['TINT:8', 0],
-						'deleted' => ['BOOL'],
+						'deleted' => ['BOOL', 0],
 						'role' => ['TINT:8', 0],
 					],
 					'PRIMARY_KEY' => 'char_id',

@@ -27,6 +27,7 @@ $lang = array_merge($lang, array(
 	'ACP_DKP_WEEKEND_START'		=> 'Standard weekend raid start time',
 	'ACP_DKP_DECAY_PERC'		=> 'Percentage of DKP to decay each week',
 	'ACP_DKP_CHAR_ADMIN' => 'Character administration',
+	'ACP_DKP_CHAR_TITLE' => 'Character administration',
 	'ACP_DKP_CHAR_EXPLAIN' => 'Here you can update the characters associated with forum users.',
 	'ACP_DKP_NEW_CHAR_NAME_REQUIRED' => 'You must enter a character name to add a new character.',
 	'ACP_DKP_NEW_CHAR_CHAR_EXISTS' => 'A character with that name already exists in the database.',
