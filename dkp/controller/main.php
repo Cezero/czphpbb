@@ -944,7 +944,7 @@ class main
 					trigger_error("Raid ID not set, nothing to view");
 				}
 
-				$sql = 'SELECT r.day, r.start, r.end, r.description, r.entered_on, r.seconds_earn, r.double_dkp, u.username
+				$sql = 'SELECT r.day, r.rstart, r.rend, r.description, r.entered_on, r.seconds_earn, r.double_dkp, u.username
 					FROM ' . $this->raid_table . ' r
 					JOIN ' . USERS_TABLE . ' u
 					ON (r.entered_by = u.user_id)
@@ -1225,7 +1225,7 @@ class main
 				// get raid info if raid_id set
 				if ($raid_id > -1) {
 					$button_label = 'Submit Changes';
-					$sql = 'SELECT r.day, r.start, r.end, r.description, r.entered_on, r.seconds_earn, r.double_dkp, u.username
+					$sql = 'SELECT r.day, r.rstart, r.rend, r.description, r.entered_on, r.seconds_earn, r.double_dkp, u.username
 						FROM ' . $this->raid_table . ' r
 						JOIN ' . USERS_TABLE . ' u
 						ON (r.entered_by = u.user_id)
@@ -1395,13 +1395,13 @@ class main
 					// insert main raid info
 					$data = array(
 							'day' => strtotime($raid_date),
-							'start' => $raid_start,
+							'rstart' => $raid_start,
 							'description' => $raid_desc,
 							'entered_by' => $this->user->data['user_id'],
 							'entered_on' => time(),
 							'seconds_earn' => $seconds_checked,
 							'double_dkp' => $double_dkp,
-							'end' => $raid_end,
+							'rend' => $raid_end,
 							);
 					if ($raid_end > -1) {
 						$data['raid_ticks'] = gen_util::countTicks(array($raid_start, $raid_end));

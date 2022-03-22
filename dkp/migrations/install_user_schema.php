@@ -92,8 +92,8 @@ class install_user_schema extends \phpbb\db\migration\migration
 					'COLUMNS' => [
 						'raid_id' => ['UINT', null, 'auto_increment'],
 						'day' => ['UINT', 0],
-						'start' => ['DECIMAL', 0],
-						'end' => ['DECIMAL', 0],
+						'rstart' => ['DECIMAL', 0],
+						'rend' => ['DECIMAL', 0],
 						'description' => ['VCHAR', ''],
 						'entered_by' => ['UINT', 0],
 						'entered_on' => ['UINT', 0],
