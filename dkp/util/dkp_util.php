@@ -94,7 +94,7 @@ class dkp_util
 		$start_date = $this->getStartDate($user_id);
 		// get DKP / attendance from ALL completed raids
 		$sql = 'SELECT
-				r.raid_id, r.day, r.start, r.end, r.description, r.raid_ticks, r.seconds_earn, r.double_dkp,
+				r.raid_id, r.day, r.rstart, r.rend, r.description, r.raid_ticks, r.seconds_earn, r.double_dkp,
 				u.username as entered_by,
 				c.char_name,
 				a.char_times, a.earned_dkp as amount, a.ticks
@@ -217,11 +217,11 @@ class dkp_util
 			// determine if there is currently an open raid that this
 			// user should earn credit for right now
 			$sql = 'SELECT
-				t1.start, t1.double_dkp, t1.seconds_earn, t2.char_times
+				t1.rstart, t1.double_dkp, t1.seconds_earn, t2.char_times
 				FROM phpbb_czphpbb_dkp_raid as t1
 				LEFT JOIN phpbb_czphpbb_dkp_raid_attendance as t2
 					ON (t2.raid_id = t1.raid_id)
-				WHERE t1.end < 0
+				WHERE t1.rend < 0
 				AND t2.user_id = ' . (int) $user_id . '
 				AND char_role = ' . (int) $char_role;
 			$result = $this->db->sql_query($sql);
@@ -233,7 +233,7 @@ class dkp_util
 					if ($row['double_dkp'] == 1) {
 						$ppt += $ppt;
 					}
-					$earned += gen_util::calcDKP($ppt, explode(',', $row['char_times']), $row['start'], 1);
+					$earned += gen_util::calcDKP($ppt, explode(',', $row['char_times']), $row['rstart'], 1);
 				}
 			}
 		}
@@ -304,11 +304,11 @@ class dkp_util
 		if ($include_open == 1) {
 			// get current open raid?
 			$sql = 'SELECT
-				t1.start, t1.double_dkp, t1.seconds_earn, t2.user_id, t2.char_role, t2.char_times
+				t1.rstart, t1.double_dkp, t1.seconds_earn, t2.user_id, t2.char_role, t2.char_times
 				FROM phpbb_czphpbb_dkp_raid as t1
 				LEFT JOIN phpbb_czphpbb_dkp_raid_attendance as t2
 					ON (t2.raid_id = t1.raid_id)
-				WHERE t1.end < 0';
+				WHERE t1.rend < 0';
 			$result = $this->db->sql_query($sql);
 			$rows = $this->db->sql_fetchrowset($result);
 			$this->db->sql_freeresult($result);
@@ -318,7 +318,7 @@ class dkp_util
 					if ($row['double_dkp'] == 1) {
 						$ppt += $ppt;
 					}
-					$all_dkp[$row['user_id']][$row['char_role'] == 2 ? 0 : 1] += gen_util::calcDKP($ppt, explode(',', $row['char_times']), $row['start'], 1);
+					$all_dkp[$row['user_id']][$row['char_role'] == 2 ? 0 : 1] += gen_util::calcDKP($ppt, explode(',', $row['char_times']), $row['rstart'], 1);
 				}
 			}
 		}

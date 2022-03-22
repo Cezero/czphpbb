@@ -483,8 +483,8 @@ class main
 							);
 					if ($dkp_entry['type'] == 'Raid') {
 						$block_vars['DESC'] = $dkp_entry['data']['description'];
-						$block_vars['RSTART'] = gen_util::formatTime($dkp_entry['data']['start']);
-						$block_vars['REND'] = gen_util::formatTime($dkp_entry['data']['end']);
+						$block_vars['RSTART'] = gen_util::formatTime($dkp_entry['data']['rstart']);
+						$block_vars['REND'] = gen_util::formatTime($dkp_entry['data']['rend']);
 						$block_vars['RTICKS'] = $dkp_entry['data']['raid_ticks'];
 						$block_vars['CTICKS'] = $dkp_entry['data']['ticks'] ? $dkp_entry['data']['ticks'] : 0;
 						$block_vars['U_VIEW_EVENT'] = $this->helper->route('czphpbb_dkp_controller', array('name' => 'viewraid', 'raidid' => (int) $dkp_entry['data']['raid_id']));
@@ -585,7 +585,7 @@ class main
 				unset($sort_params);
 
 				$sql = 'SELECT
-					r.raid_id, r.day, r.description, r.raid_ticks, r.start, r.end,
+					r.raid_id, r.day, r.description, r.raid_ticks, r.rstart, r.rend,
 					CASE
 						WHEN r.double_dkp THEN r.raid_ticks * 2
 						ELSE r.raid_ticks
@@ -1233,8 +1233,8 @@ class main
 					$result = $this->db->sql_query($sql);
 					$raid_summary = $this->db->sql_fetchrow($result);
 					$this->db->sql_freeresult($result);
-					$raid_start = $raid_summary['start'];
-					$raid_end = $raid_summary['end'];
+					$raid_start = $raid_summary['rstart'];
+					$raid_end = $raid_summary['rend'];
 					$raid_desc = $raid_summary['description'];
 					$raid_date = date('Y-m-d', $raid_summary['day']);
 					$seconds_checked = $raid_summary['seconds_earn'] ? 1 : 0;
