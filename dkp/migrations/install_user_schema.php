@@ -76,7 +76,7 @@ class install_user_schema extends \phpbb\db\migration\migration
 						'char_uid_cid' => [null, ['user_id','char_id']],
 						'char_uid_role' => [null, ['user_id','role']]
 					]
-				] 
+				],
 
 				$this->table_prefix . 'czphpbb_dkp_log' => [
 					'COLUMNS' => [
