@@ -553,7 +553,7 @@ class main
 				// count the raids (only completed)
 				$sql = 'SELECT COUNT(raid_id) AS total_raids
 					FROM phpbb_czphpbb_dkp_raid
-					WHERE end > -1';
+					WHERE rend > -1';
 				$result = $this->db->sql_query($sql);
 				$total_raids = (int) $this->db->sql_fetchfield('total_raids');
 				$this->db->sql_freeresult($result);
