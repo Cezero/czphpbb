@@ -43,7 +43,7 @@ class install_ucp_module extends \phpbb\db\migration\migration
 				'UCP_DKP_TITLE',
 				array(
 					'module_basename'	=> '\czphpbb\dkp\ucp\main_module',
-					'modes'				=> array('settings'),
+					'modes'				=> array('characters'),
 				),
 			)),
 		);
