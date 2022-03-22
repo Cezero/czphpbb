@@ -53,7 +53,7 @@ function parseName() {
 
 	displayElement.empty(); // clear it out
 
-	// "as" character only applies to main, ignore this for 2nd mains
+	// "as" character only applies to main, ignore this for raid boxes 
 	if (role == 2) {
 		displayElement.append(makeCharButton(userID));
 		if (asChar.length > 0) {
@@ -164,7 +164,7 @@ function displayItemList() {
 			var award_str = $.czphpbbDKP.itemlist[i].awarded;
 			if ($.czphpbbDKP.itemlist[i].role != 2) {
 				// wasn't awarded to main character
-				var role = $.czphpbbDKP.itemlist[i].role == 0 ? 'Alt' : '2nd';
+				var role = $.czphpbbDKP.itemlist[i].role == 0 ? 'Box' : 'Raid Box';
 				award_str += '<br/><span class="charas-text">(' + $.czphpbbDKP.itemlist[i].main + ' ' + role + ')</span>';
 			}
 			itemRow.append($('<td/>', { html: award_str }));

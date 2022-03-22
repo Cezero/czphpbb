@@ -422,7 +422,7 @@ class dkp_util
 				$all_perc[$row['user_id']][$range]['total'] = $total;
 				$all_perc[$row['user_id']][$range]['perc'] = ($total ? $ticks / $total : 0);
 			}
-			// no rollover for 2nd mains
+			// no rollover for raid boxes
 			if ($char_role == 2) {
 				$sql = 'SELECT alltime, ninety, sixty, thirty
 					FROM phpbb_czphpbb_dkp_rollover

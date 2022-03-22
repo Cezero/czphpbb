@@ -300,7 +300,7 @@ class main
 				}
 			} elseif ($name == 'addadj') {
 				$user_id = $this->request->variable('user_id', 0);
-				$pool = $this->request->variable('adjpool', 0); // 0 == main, 1 == 2nd
+				$pool = $this->request->variable('adjpool', 0); // 0 == main, 1 == raid box
 				$desc = $this->request->variable('adjdesc', '');
 				$value = $this->request->variable('adjamnt', 0);
 				$by = $this->user->data['user_id'];
@@ -980,7 +980,7 @@ class main
 								// not main, add descriptor
 								$award_str .= sprintf(' <span class="charas-text">(%s %s)</span>',
 										$row['main'],
-										$row['role'] == 1 ? '2nd' : 'Alt'
+										$row['role'] == 1 ? 'Raid Box' : 'Alt'
 										);
 							}
 							$this->template->assign_block_vars('loot.col.row', array(
@@ -1134,7 +1134,7 @@ class main
 					if ($row['role'] != 2) {
 						$award_str .= sprintf(' <span class="charas-text">(%s %s)</span>',
 								$row['main'],
-								$row['role'] == 1 ? '2nd' : 'Alt'
+								$row['role'] == 1 ? 'Raid Box' : 'Box'
 								);
 					}
 					$this->template->assign_block_vars('row', array(
@@ -1142,7 +1142,7 @@ class main
 								'DESC' => $row['description'],
 								'AWARDED' => $award_str,
 								'COST' => $row['cost'],
-								'POOL' => $row['second_pool'] ? '2nd' : 'Main'
+								'POOL' => $row['second_pool'] ? 'RB' : 'Main'
 								));
 				}
 
@@ -1163,9 +1163,9 @@ class main
 					if ($row['role'] == '') {
 						$cat = 'Combined';
 					} elseif ($row['role'] == 0) {
-						$cat = 'Alts';
+						$cat = 'Boxes';
 					} elseif ($row['role'] == 1) {
-						$cat = '2nds';
+						$cat = 'Raid Boxes';
 					} elseif ($row['role'] == 2) {
 						$cat = 'Mains';
 					}

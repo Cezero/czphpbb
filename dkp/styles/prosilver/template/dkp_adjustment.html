@@ -24,7 +24,7 @@ var secondTick = '{V_SECONDTICK}';
 				<ul class="dkpadjust">
 					<li>Use a negative number for a penalty (-5), a positive number for a bonus (5).</li>
 					<li>If the value is a percentage of the member's DKP, follow the number with a percent sign (-10%).</li>
-					<li>If the value is in terms of "ticks" (which means the value is different for the main and 2nd main DKP pools) follow the amount with the word "tick" (1 tick).</li>
+					<li>If the value is in terms of "ticks" (which means the value is different for the Main and Raid Box DKP pools) follow the amount with the word "tick" (1 tick).</li>
 					<li>To do bulk adjustments, leave the character name blank.  The adjustment will be applied to all members.  Alternatively, either upload a list of names or a raid dump.  Then the adjustment will be applied only to members in the upload.</li>
 					<li>If uploading a file, you can leave the adjustment value blank, and instead, include it in the file, as the last entry per line.</li>
 				</ul>
@@ -54,7 +54,7 @@ var secondTick = '{V_SECONDTICK}';
 					<input type="text" class="inputbox autowidth" name="adjvalue" id="adjvalue" size="5"></br>
 					<label for="adjpool"><strong>Applies to{L_COLON}</strong></label>
 					<input type="checkbox" id="adjpoolmain" name="adjpoolmain" value="Main" checked>Main Pool
-					<input type="checkbox" id="adjpoolsecond" name="adjpoolsecond" value="Second">2nd Main Pool<br/>
+					<input type="checkbox" id="adjpoolsecond" name="adjpoolsecond" value="Second">Raid Box Pool<br/>
 					<label for="adjfile"><strong>Adjustment file{L_COLON}</strong></label>
 					<input type="file" name="adjfile" id="adjfile" accept="text/plain"/>
 					<br/><br/>
