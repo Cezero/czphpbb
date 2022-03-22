@@ -56,7 +56,7 @@ class dkp_util
 			FROM
 				phpbb_czphpbb_dkp_adjustment as a
 					JOIN phpbb_czphpbb_dkp_characters as c
-						ON (c.user_id = c.user_id and ((a.second_pool = 0 and c.role = 2) or (a.second_pool = 1 and c.role = 1)))
+						ON (c.user_id = c.user_id and ((a.second_pool = false and c.role = 2) or (a.second_pool = true and c.role = 1)))
 					JOIN  phpbb_users as u
 						ON (u.user_id = a.entered_by)
 			WHERE a.adj_id = '.(int) $adj_id;
@@ -89,7 +89,7 @@ class dkp_util
 	public function getDKPBreakdown($user_id, $role = 0)
 	{
 		$char_role = ($role == 0 ? 2 : 1);
-		$second_pool = ($role == 0 ? 0 : 1);
+		$second_pool = ($role == 0 ? false : true);
 
 		$start_date = $this->getStartDate($user_id);
 		// get DKP / attendance from ALL completed raids
@@ -137,7 +137,7 @@ class dkp_util
 			WHERE
 				r.day >= ' . (int) $start_date . ' AND
 				l.user_id = ' . (int) $user_id . ' AND
-				l.second_pool = ' . (int) $second_pool;
+				l.second_pool = ' . $second_pool;
 		$result = $this->db->sql_query($sql);
 		$r_loot = $this->db->sql_fetchrowset($result);
 		$this->db->sql_freeresult($result);
@@ -152,7 +152,7 @@ class dkp_util
 			WHERE
 				a.entered_on >= ' . (int) $start_date . ' AND
 				a.user_id = ' . (int) $user_id . ' AND
-				a.second_pool = ' . (int) $second_pool;
+				a.second_pool = ' . $second_pool;
 		$result = $this->db->sql_query($sql);
 		$r_adj = $this->db->sql_fetchrowset($result);
 		$this->db->sql_freeresult($result);
@@ -173,7 +173,7 @@ class dkp_util
 	function getDKP($user_id, $role = 0, $include_open = 1)
 	{
 		$char_role = ($role == 0 ? 2 : 1);
-		$second_pool = ($role == 0 ? 0 : 1);
+		$second_pool = ($role == 0 ? false : true);
 
 		// get total earned DKP from completed raids
 		$sql = 'SELECT
@@ -189,7 +189,7 @@ class dkp_util
 			sum(cost) as spent
 			FROM phpbb_czphpbb_dkp_raid_loot
 			WHERE user_id = ' . (int) $user_id . '
-			AND second_pool = ' . (int) $second_pool;
+			AND second_pool = ' . $second_pool;
 		$this->db->sql_query($sql);
 		$spent = $this->db->sql_fetchfield('spent');
 
@@ -198,7 +198,7 @@ class dkp_util
 			sum(value) as adjusted
 			FROM phpbb_czphpbb_dkp_adjustment
 			WHERE user_id = ' . (int) $user_id . '
-			AND second_pool = ' . (int) $second_pool;
+			AND second_pool = ' . $second_pool;
 		$this->db->sql_query($sql);
 		$adjusted = $this->db->sql_fetchfield('adjusted');
 
