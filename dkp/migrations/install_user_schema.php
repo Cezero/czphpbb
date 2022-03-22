@@ -144,7 +144,7 @@ class install_user_schema extends \phpbb\db\migration\migration
 					'COLUMNS' => [
 						'user_id' => ['UINT', ''],
 						'dkp' => ['UINT', null],
-						'full' => ['UINT', null],
+						'alltime' => ['UINT', null],
 						'ninety' => ['UINT', null],
 						'sixty' => ['UINT', null],
 						'thirty' => ['UINT', null],

@@ -420,7 +420,7 @@ class dkp_util
 			}
 			// no rollover for 2nd mains
 			if ($char_role == 2) {
-				$sql = 'SELECT full, ninety, sixty, thirty
+				$sql = 'SELECT alltime, ninety, sixty, thirty
 					FROM phpbb_czphpbb_dkp_rollover
 					WHERE user_id = ' . (int) $row['user_id'];
 				$result = $this->db->sql_query($sql);
@@ -428,7 +428,7 @@ class dkp_util
 				$this->db->sql_freeresult($result);
 				if (isset($rollover)) {
 					// all_time raid count always includes rollover
-					$all_perc[$row['user_id']]['at']['ticks'] += $rollover['full'];
+					$all_perc[$row['user_id']]['at']['ticks'] += $rollover['alltime'];
 					// from Dec 11 + 30 days include all rollover
 					if ($today < 1515542400) {
 						$all_perc[$row['user_id']]['30']['ticks'] += $rollover['thirty'];
