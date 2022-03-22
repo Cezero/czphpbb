@@ -119,7 +119,7 @@ class install_user_schema extends \phpbb\db\migration\migration
 					'KEYS' => [
 						'unique_index' => ['UNIQUE', ['user_id','raid_id','char_id']],
 						'user_id' => [null, ['user_id','raid_id']],
-						'rl_userid_pool' => [null, ['user_id','char_role']]
+						'ra_userid_pool' => [null, ['user_id','char_role']]
 					]
 				],
 
@@ -135,7 +135,9 @@ class install_user_schema extends \phpbb\db\migration\migration
 						'second_pool' => ['BOOL', 0],
 					],
 					'PRIMARY_KEY' => 'user_id',
-					'KEYS' => [null, ['user_id','second_pool']]
+					'KEYS' => [
+						'rl_userid_pool' => [null, ['user_id','second_pool']]
+					]
 				],
 
 				$this->table_prefix . 'czphpbb_dkp_rollover' => [
