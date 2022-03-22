@@ -1462,10 +1462,14 @@ class main
 
 				add_form_key('czphpbb/dkp/addraid');
 
-				$midpoint = ceil(count($charlist[2])/2);
-				$chardata['main'] = array_chunk($charlist[2], $midpoint, true);
-				$midpoint = ceil(count($charlist[1])/2);
+				if (count($charlist[2]) > 0) {
+					$midpoint = ceil(count($charlist[2])/2);
+					$chardata['main'] = array_chunk($charlist[2], $midpoint, true);
+				} else {
+					$chardata['main'] = [];
+				}
 				if (count($charlist[1]) > 0) {
+					$midpoint = ceil(count($charlist[1])/2);
 					$chardata['second'] = array_chunk($charlist[1], $midpoint, true);
 				} else {
 					$chardata['second'] = [];
