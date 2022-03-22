@@ -99,7 +99,7 @@ class install_user_schema extends \phpbb\db\migration\migration
 						'entered_on' => ['UINT', 0],
 						'raid_ticks' => ['UINT', 0],
 						'seconds_earn' => ['TINT:8', 0],
-						'double_dkp' => ['TINT:8', 0],
+						'double_dkp' => ['BOOL', 0],
 					],
 					'PRIMARY_KEY' => ['raid_id']
 				],

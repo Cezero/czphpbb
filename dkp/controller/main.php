@@ -605,7 +605,7 @@ class main
 							FROM ' . $this->loot_table . '
 							GROUP BY raid_id) l
 					ON (l.raid_id = r.raid_id)
-					WHERE r.end > -1
+					WHERE r.rend > -1
 					ORDER BY ' . $order_by;
 				$result = $this->db->sql_query_limit($sql, 100, $start);
 	      $rows = $this->db->sql_fetchrowset($result);
