@@ -29,6 +29,10 @@ class install_acp_module extends \phpbb\db\migration\migration
 			array('module.add', array(
 				'acp',
 				'ACP_CAT_DOT_MODS',
+				'ACP_DKP_TITLE'
+				)),
+			array('module.add', array(
+				'acp',
 				'ACP_DKP_TITLE',
 				array(
 					'module_basename'	=> '\czphpbb\dkp\acp\main_module',
