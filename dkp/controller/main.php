@@ -652,7 +652,7 @@ class main
 				* a = char name
 				* c = char class
 				* d = main dkp
-				* e = 2nd dkp
+				* e = raid box dkp
 				* f = first raid
 				* g = most recent raid
 				* h = all time
