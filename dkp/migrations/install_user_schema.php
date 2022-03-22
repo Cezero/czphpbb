@@ -27,7 +27,7 @@ class install_user_schema extends \phpbb\db\migration\migration
 	{
 		return [
 			'add_tables'		=> [
-				$this->table_prefix . 'lucy_itemlist' => [
+				$this->table_prefix . 'czphpbb_lucy_itemlist' => [
 					'COLUMNS' => [
 						'id' => ['UINT', 0],
 						'name' => ['CHAR:80', ''],
@@ -180,7 +180,7 @@ class install_user_schema extends \phpbb\db\migration\migration
 				],
 			],
 			'drop_tables'		=> [
-				$this->table_prefix . 'lucy_itemlist',
+				$this->table_prefix . 'czphpbb_lucy_itemlist',
 				$this->table_prefix . 'czphpbb_dkp_adjustment',
 				$this->table_prefix . 'czphpbb_dkp_char_roles',
 				$this->table_prefix . 'czphpbb_dkp_characters',

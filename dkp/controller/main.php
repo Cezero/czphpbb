@@ -132,7 +132,7 @@ class main
 				$item_prefix = $this->request->variable('term', '');
 				if ($item_prefix) {
 					$sql = 'SELECT name as label, id as value
-						FROM lucy_itemlist
+						FROM phpbb_czphpbb_lucy_itemlist
 						WHERE name LIKE \'' . $this->db->sql_escape($item_prefix) . '%\'
 						LIMIT 20';
 					$result = $this->db->sql_query($sql);
@@ -214,7 +214,7 @@ class main
 
 					$sql = 'SELECT rl.*, li.name, c1.char_name as awarded, c1.role, c2.char_name as main
 						FROM ' . $this->loot_table . ' as rl
-						JOIN lucy_itemlist as li
+						JOIN phpbb_czphpbb_lucy_itemlist as li
 						ON (li.id = rl.lucy_id)
 						JOIN ' . $this->char_table . ' as c1
 						ON (c1.user_id = rl.user_id and c1.char_id = rl.char_id)
@@ -257,7 +257,7 @@ class main
 				$sure = $this->request->variable('areyousure', 0);
 				if ($lucy_id == 0) {
 					$sql = 'SELECT id
-						FROM lucy_itemlist
+						FROM phpbb_czphpbb_lucy_itemlist
 						WHERE name = \'' . $this->db->sql_escape($item_name) . '\'
 						LIMIT 1';
 					$result = $this->db->sql_query($sql);
@@ -956,7 +956,7 @@ class main
 				// get loot
 				$sql = 'SELECT rl.*, li.name, c1.char_name as awarded, c1.role, c2.char_name as main
 					FROM ' . $this->loot_table . ' as rl
-					JOIN lucy_itemlist as li
+					JOIN phpbb_czphpbb_lucy_itemlist as li
 					ON (li.id = rl.lucy_id)
 					JOIN ' . $this->char_table . ' as c1
 					ON (c1.user_id = rl.user_id and c1.char_id = rl.char_id)
@@ -1107,7 +1107,7 @@ class main
 				}
 
 				$sql = 'SELECT name
-					FROM lucy_itemlist
+					FROM phpbb_czphpbb_lucy_itemlist
 					WHERE id = ' . (int) $lucy_id;
 				$result = $this->db->sql_query($sql);
 				$item_name = $this->db->sql_fetchfield('name');
